@@ -31,7 +31,9 @@ public class GridOptionsController {
 		
 		exportMap.setOnMouseClicked(e -> {
 			Grid grid = gridCtrl.getGrid();
-			fileChoose.setInitialDirectory(new File("./"));
+			fileChoose.setInitialDirectory(
+		            new File(System.getProperty("./"))
+		    ); 
 			File file = fileChoose.showSaveDialog(stage);
 			if(file != null) {
 				GridFile.exportFile(grid, file);

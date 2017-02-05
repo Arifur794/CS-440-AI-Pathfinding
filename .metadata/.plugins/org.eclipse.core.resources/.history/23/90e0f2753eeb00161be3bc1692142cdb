@@ -21,7 +21,6 @@ public class GridOptionsController {
 	@FXML
 	public void initialize() {
 		importMap.setOnMouseClicked(e -> {
-			fileChoose.setInitialDirectory(new File("./"));
 			File file = fileChoose.showOpenDialog(stage);
 			if(file != null) {
 				Grid grid = GridFile.importFile(file.getAbsolutePath(), gridCtrl.ROWS, gridCtrl.COLS);
@@ -31,7 +30,6 @@ public class GridOptionsController {
 		
 		exportMap.setOnMouseClicked(e -> {
 			Grid grid = gridCtrl.getGrid();
-			fileChoose.setInitialDirectory(new File("./"));
 			File file = fileChoose.showSaveDialog(stage);
 			if(file != null) {
 				GridFile.exportFile(grid, file);
