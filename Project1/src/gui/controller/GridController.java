@@ -2,19 +2,23 @@ package gui.controller;
 
 import gui.model.Cell;
 import gui.model.Grid;
+import heuristics.DistanceHeuristic;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import searches.AStar;
 import searches.Node;
+import searches.UCS;
+import searches.WAStar;
 
 public class GridController {
 	@FXML 
 	private GridPane gridPane;
 	private Grid grid;
 	private CellDisplayController cellDisplay;
-	
+	private Rectangle[][] displayRect;
 	final double BUTTON_PADDING = 2;
 	final int ROWS = 120; 
 	final int COLS = 160;
@@ -24,7 +28,7 @@ public class GridController {
 	
 	public GridController() {
 		this.grid = new Grid(COLS, ROWS);
-		//this.cellDisplay = new CellDisplayController();
+		this.displayRect = new Rectangle[ROWS][COLS];
 	}
 	
 	@FXML
@@ -111,15 +115,38 @@ public class GridController {
 	public void runAStar() {
 		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
 		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		AStar pathFinder = new AStar(start, end, grid, heuristic);
+		Node[] path = pathFinder.run();
+		System.out.println(pathFinder.calculateCost());
+		
+		for(Node n : path) {
+			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+		}
 	}
 	
 	public void runWAStar() {
-		Node start = new Node(grid.getCell(grid.startCell[0], grid.startCell[1]));
-		Node end = new Node(grid.getCell(grid.endCell[0], grid.endCell[1]));
+		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		WAStar pathFinder = new WAStar(start, end, grid, heuristic, 2);
+		Node[] path = pathFinder.run();
+		System.out.println(pathFinder.calculateCost());
+		
+		for(Node n : path) {
+			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+		}
 	}
 
 	public void runUCS() {
-		Node start = new Node(grid.getCell(grid.startCell[0], grid.startCell[1]));
-		Node end = new Node(grid.getCell(grid.endCell[0], grid.endCell[1]));
+		Node start = new Node(grid.getCell(grid.startCell[0] + 1, grid.startCell[1] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[0] + 1, grid.endCell[1] + 1));
+		UCS pathFinder = new UCS(start, end, grid);
+		Node[] path = pathFinder.run();
+		System.out.println(pathFinder.calculateCost());
+		
+		for(Node n : path) {
+			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+		}
 	}
 }

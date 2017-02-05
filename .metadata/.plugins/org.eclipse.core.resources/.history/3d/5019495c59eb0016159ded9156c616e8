@@ -1,0 +1,16 @@
+package searches;
+
+public class WAStar extends SearchAlgo {
+	private Heuristic func;
+	private float weight;
+	
+	public WAStar(Node start, Node goal, Grid grid, Heuristic func, float weight) {
+		super(start, goal, grid);	
+		this.func = func;
+		this.weight = weight;
+	}
+
+	public float costFunc(Node parent, Node child) {
+		return grid.costTo(parent, child) + weight * func.h(child);
+	}
+}

@@ -1,0 +1,7 @@
+package searches;
+
+public class UCS extends SearchAlgo {
+	public UniformCostSearch(Node start, Node goal, Grid grid) {
+		super(start, goal, grid);
+	}
+}

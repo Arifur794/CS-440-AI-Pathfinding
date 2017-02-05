@@ -1,3 +1,10 @@
 1486254460340	Rename type 'MainApp'
 1486265779482	Rename package 'files'
 1486266023677	Encapsulate field 'parent'
+1486266958125	Delete element
+1486266986578	Rename type 'searchAlgo'
+1486267088388	Encapsulate field 'width'
+1486267101407	Encapsulate field 'height'
+1486267489263	Copy compilation unit
+1486267497281	Copy compilation unit
+1486267543414	Rename package 'heuistics'

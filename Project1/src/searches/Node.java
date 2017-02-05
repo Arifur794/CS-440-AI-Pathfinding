@@ -25,7 +25,7 @@ public class Node extends Cell {
 		setNeighborList(n);
 	}
 
-	private void setNeighborList(Cell[] n) {
+	public void setNeighborList(Cell[] n) {
 		int len = n.length;
 		this.neighborList = new Node[len];
 		for(int i = 0; i < len; i++) {
@@ -33,7 +33,7 @@ public class Node extends Cell {
 		}
 		
 	}
-
+	
 	public Node getParent() {
 		return parent;
 	}

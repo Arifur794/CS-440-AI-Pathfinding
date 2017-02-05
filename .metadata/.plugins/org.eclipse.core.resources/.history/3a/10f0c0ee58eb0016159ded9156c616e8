@@ -1,0 +1,14 @@
+package searches;
+
+import gui.model.Grid;
+import heuristics.DistanceHeuristic;
+
+public class AStar extends SearchAlgo {
+	
+	private DistanceHeuristic func;
+	
+	public AStar(Node start, Node goal, Grid grid, DistanceHeuristic func) {
+		super(start, goal, grid);	
+		this.func = func;
+	}
+}

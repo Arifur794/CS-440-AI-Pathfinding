@@ -1,5 +1,6 @@
 package gui.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Random;
@@ -19,7 +20,8 @@ import gui.model.Cell.HighwayDirection;
  * The grid is enumerated from 1 to ROW and 1 to COL inclusive.
  */
 public class Grid {
-	final int width, height;
+	private final int width;
+	private final int height;
 	final Cell[][] grid;
 	private GridProperties GP = new GridProperties();
 	private static Random rand = new Random();
@@ -61,8 +63,8 @@ public class Grid {
 		// create hard cells
 		for(int i = 0; i < GP.NUM_HARD_CELL_CTR; i++) {
 			// calculate random center for hard cell
-			int center_x = random(0, this.width - 1);
-			int center_y = random(0, this.height - 1);
+			int center_x = random(0, this.getWidth() - 1);
+			int center_y = random(0, this.getHeight() - 1);
 			
 			this.hardCellsCenters[i][0] = center_x;
 			this.hardCellsCenters[i][1] = center_y;
@@ -81,12 +83,12 @@ public class Grid {
 				start_y = 0;
 			}
 			
-			if(end_x > width) {
-				end_x = width;
+			if(end_x > getWidth()) {
+				end_x = getWidth();
 			}
 			
-			if(end_y > height) {
-				end_y = height;
+			if(end_y > getHeight()) {
+				end_y = getHeight();
 			}
 			
 			for(int j = start_x; j < end_x; j++) {
@@ -128,11 +130,11 @@ public class Grid {
 		HighwayDirection hdir = HighwayDirection.NONE;
 		if(b_x == 0) {
 			hdir = HighwayDirection.RIGHT;
-		} else if(b_x == width - 1) {
+		} else if(b_x == getWidth() - 1) {
 			hdir = HighwayDirection.LEFT;
 		} else if(b_y == 0) {
 			hdir = HighwayDirection.DOWN;
-		} else if(b_y == height - 1) {
+		} else if(b_y == getHeight() - 1) {
 			hdir = HighwayDirection.UP;
 		}
 		
@@ -204,8 +206,8 @@ public class Grid {
 	
 	private void removeHighwayCells() {
 		Cell c;
-		for(int i = 0; i < height; i++) {
-			for(int j = 0; j < width; j++) {
+		for(int i = 0; i < getHeight(); i++) {
+			for(int j = 0; j < getWidth(); j++) {
 				c = this.grid[i][j];
 				if(c.isHighway()) {
 					c.convertTo(CellType.UNBLOCKED);
@@ -220,13 +222,13 @@ public class Grid {
 	private int[] getRandomBoundary() {
 		int chooseBoundary = random(0, 4), x = 0, y = 0;
 		if(chooseBoundary < 1) { // upper boundary
-			x = random(1, width - 2);
+			x = random(1, getWidth() - 2);
 		} else if(chooseBoundary < 2) { // right boundary
-			x = width - 1; y = random(1, height - 2);
+			x = getWidth() - 1; y = random(1, getHeight() - 2);
 		} else if(chooseBoundary < 3) { // bottom boundary
-			y = height - 1; x = random(1, width - 2);
+			y = getHeight() - 1; x = random(1, getWidth() - 2);
 		} else { // left boundary
-			y = random(1, height - 2);
+			y = random(1, getHeight() - 2);
 		}
 		return new int[]{x, y};
 	}
@@ -259,20 +261,20 @@ public class Grid {
 	}
 	
 	private boolean isBoundaryCell(int x, int y) {
-		return (x == 0 || x == width - 1 || y == 0 || y == height - 1) ? true : false;
+		return (x == 0 || x == getWidth() - 1 || y == 0 || y == getHeight() - 1) ? true : false;
 	}
 	
 	private boolean inBounds(int x, int y) {
-		return (x < 0 || x >= width || y < 0 || y >= height) ? false : true;
+		return (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) ? false : true;
 	}
 	
 	private void createBlockedCells() {
-		int numHardCells = (int)(GP.BLOCK_CELL_PER * width * height);
+		int numHardCells = (int)(GP.BLOCK_CELL_PER * getWidth() * getHeight());
 		int count = 0, x, y;
 		Cell c;
 		while(count < numHardCells) {
-			x = random(0, width - 1);
-			y = random(0, height - 1);
+			x = random(0, getWidth() - 1);
+			y = random(0, getHeight() - 1);
 			c = this.grid[y][x];
 			if(!c.isHighway()) {
 				c.convertTo(CellType.BLOCKED);
@@ -355,12 +357,12 @@ public class Grid {
 	private int pickRandomCellInSection(SectionType st) {
 		switch(st) {
 		case BOT_ROW:
-			return random(height - 1 - GP.POINT_AREA, height - 1);
+			return random(getHeight() - 1 - GP.POINT_AREA, getHeight() - 1);
 		case TOP_ROW:
 		case LEFT_COL:
 			return random(0, GP.POINT_AREA - 1);
 		case RIGHT_COL:
-			return random(width - 1 - GP.POINT_AREA, width - 1);
+			return random(getWidth() - 1 - GP.POINT_AREA, getWidth() - 1);
 		default:
 			return 0;		
 		}
@@ -391,9 +393,9 @@ public class Grid {
 	
 	
 	public boolean changeStart(int[] newStart) {
-		if ( (newStart[0] <= height -1  && newStart[0] >= height - 1 - GP.POINT_AREA) ||
+		if ( (newStart[0] <= getHeight() -1  && newStart[0] >= getHeight() - 1 - GP.POINT_AREA) ||
 				(newStart[0] <= GP.POINT_AREA - 1 && newStart[0] >= 0) &&
-				(newStart[1] <= width - 1  && newStart[1] >= width - 1 - GP.POINT_AREA) ||
+				(newStart[1] <= getWidth() - 1  && newStart[1] >= getWidth() - 1 - GP.POINT_AREA) ||
 				(newStart[1] <= GP.POINT_AREA - 1 && newStart[1] >= 0)) {
 			Cell newStartCell = this.grid[newStart[0]][newStart[1]];
 			Cell oldStart = this.grid[startCell[0]][startCell[1]];
@@ -418,9 +420,9 @@ public class Grid {
 	}
 	
 	public boolean changeEnd(int[] newEnd) {
-		if ( (newEnd[0] <= height -1  && newEnd[0] >= height - 1 - GP.POINT_AREA) ||
+		if ( (newEnd[0] <= getHeight() -1  && newEnd[0] >= getHeight() - 1 - GP.POINT_AREA) ||
 				(newEnd[0] <= GP.POINT_AREA - 1 && newEnd[0] >= 0) &&
-				(newEnd[1] <= width - 1  && newEnd[1] >= width - 1 - GP.POINT_AREA) ||
+				(newEnd[1] <= getWidth() - 1  && newEnd[1] >= getWidth() - 1 - GP.POINT_AREA) ||
 				(newEnd[1] <= GP.POINT_AREA - 1 && newEnd[1] >= 0)) {
 			Cell newEndCell = this.grid[newEnd[0]][newEnd[1]];
 			Cell oldEnd = this.grid[endCell[0]][endCell[1]];
@@ -462,5 +464,30 @@ public class Grid {
 		default:
 			return 0;
 		}
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+	
+	private boolean neighborBounds(int x, int y) {
+		return (x < 1 || x > width || y < 1 || y > height) ? false : true;
+ 	}
+	public Cell[] getNeighbors(int x, int y) {
+		ArrayList<Cell> neighbors = new ArrayList<Cell>(8);
+		for(int i = -1; i <= 1; i++) {
+			for(int j = -1; j <= 1; j++) {
+				if(neighborBounds(x + i, y + j) && !(i == 0 && j == 0)) {
+					neighbors.add(this.getCell(x + i, y + j));
+				}
+			}
+		}
+		
+		Cell[] nArr = new Cell[neighbors.size()];
+		return neighbors.toArray(nArr);
 	}
 }

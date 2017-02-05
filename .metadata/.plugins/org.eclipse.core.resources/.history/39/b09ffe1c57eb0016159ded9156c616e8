@@ -1,0 +1,5 @@
+package searches;
+
+public abstract class SearchAlgo {
+
+}

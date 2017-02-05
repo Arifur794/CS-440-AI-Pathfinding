@@ -1,0 +1,5 @@
+package searches;
+
+public class WAStar extends SearchAlgo {
+
+}
