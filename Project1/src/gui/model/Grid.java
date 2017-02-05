@@ -339,8 +339,8 @@ public class Grid {
 					this.grid[endY][endX].convertTo(CellType.END_POINT_HARD);
 				}
 				
-				this.startCell[0] = startX; this.startCell[1] = startY;
-				this.endCell[0] = endX; this.endCell[1] = endY;
+				this.startCell[1] = startX; this.startCell[0] = startY;
+				this.endCell[1] = endX; this.endCell[0] = endY;
 				break;
 				
 			}		
@@ -387,6 +387,32 @@ public class Grid {
 			return GP.DIAG_COSTS[atype][btype];
 		} 
 		return -1;
+	}
+	
+	
+	public boolean changeStart(int[] newStart) {
+		if ( (newStart[0] <= height -1  && newStart[0] >= height - 1 - GP.POINT_AREA) ||
+				(newStart[0] <= GP.POINT_AREA - 1 && newStart[0] >= 0) &&
+				(newStart[1] <= width - 1  && newStart[1] >= width - 1 - GP.POINT_AREA) ||
+				(newStart[1] <= GP.POINT_AREA - 1 && newStart[1] >= 0)) {
+			Cell newStartCell = this.grid[newStart[0]][newStart[1]];
+			Cell oldStart = this.grid[startCell[0]][startCell[1]];
+			if (newStartCell.celltype == CellType.BLOCKED) {
+				return false;
+			}
+			if(newStartCell.celltype == CellType.UNBLOCKED) {
+				this.grid[newStart[0]][newStart[1]].convertTo(CellType.START_POINT_UNBLOCKED);
+			} else {
+				this.grid[newStart[0]][newStart[1]].convertTo(CellType.START_POINT_HARD);
+			}
+			if(oldStart.celltype == CellType.START_POINT_UNBLOCKED) {
+				this.grid[startCell[0]][startCell[1]].convertTo(CellType.UNBLOCKED);
+			} else {
+				this.grid[startCell[0]][startCell[1]].convertTo(CellType.HARD);
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	private static int getTypeInt(Cell a) {

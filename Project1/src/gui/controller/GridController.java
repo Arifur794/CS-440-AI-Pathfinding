@@ -56,7 +56,7 @@ public class GridController {
 		return this.grid;
 	}
 	
-	private void colorGrid() {
+	public void colorGrid() {
 		//System.out.println("Here");
 		gridPane.getChildren().clear();
 		

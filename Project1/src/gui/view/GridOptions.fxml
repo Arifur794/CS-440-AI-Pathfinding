@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -14,7 +15,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                                  <VBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin>
                               </Button>
                               <Button fx:id="exportMap" alignment="CENTER" mnemonicParsing="false" text="Export Map">
@@ -65,6 +66,8 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin>
             </Button>
+            <TextField fx:id="row" promptText="Enter new start/end row" />
+            <TextField fx:id="column" promptText="Enter new start/end column" />
                            </children>
                         </VBox>
                      </children>
