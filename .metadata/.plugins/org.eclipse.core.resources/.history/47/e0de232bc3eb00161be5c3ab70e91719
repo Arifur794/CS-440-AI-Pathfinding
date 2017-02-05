@@ -19,8 +19,7 @@ public class GridProperties {
 	final int MIN_DIST = 100; // minimum distance between start and end areas
 	
 	final float easyDiag = (float) Math.sqrt(2.0);
-	final float easyHardDiag = ( (float) Math.sqrt(2.0) + (float) Math.sqrt(8.0) )/2;
-	final float hardDiag = (float) Math.sqrt(8.0);
+	final float easyHardDiag = ( (float) Math.sqrt(2.0F) + (float) Math.sqrt(8.0F) )/2;
 	
 	/*
 	 * Our implementation for costs will be as follows:
@@ -38,18 +37,18 @@ public class GridProperties {
 	 */
 	
 	final float[][] HOR_VER_COSTS = {
-			{1, 	1.5f,  -1, 0.5f,   0.75f},
-			{1.5f,  2,     -1, 0.75f,  1f},
-			{-1,    -1,    -1, -1,     -1},
-			{0.5f, 	0.75f, -1, 0.25f,  0.375f},
-			{0.75f, 1f,    -1, 0.375f, 0.5f}
+			{1, 	 1.5f,   -1, 0.625f, 0.875f},
+			{1.5f,   2,      -1, 0.875f, 1.25f},
+			{-1,     -1,     -1, -1,     -1},
+			{0.625f, 0.875f, -1, 0.25f,  0.375f},
+			{0.875f, 1.25f,  -1, 0.375f, 0.5f}
 	};
 	
 	final float[][] DIAG_COSTS = {
-			{easyDiag,        easyHardDiag,    -1, easyDiag/2f,       easyHardDiag/2f},
-			{easyHardDiag,    hardDiag, 	   -1, easyHardDiag/2f,   hardDiag/2f},
-			{-1,              -1, 			   -1, -1, 				  -1},
-			{easyDiag/2f,     easyHardDiag/2f, -1, easyDiag/4.0f,     easyHardDiag/4.0f},
-			{easyHardDiag/2f, hardDiag/2f, 	   -1, easyHardDiag/4.0f, hardDiag/4.0f}
+			{easyDiag, ( (float) Math.sqrt(2.0F) + (float) Math.sqrt(8.0F) )/2, -1, 0.8838f, 1.326f},
+			{( (float) Math.sqrt(2.0F) + (float) Math.sqrt(8.0F) )/2, (float) Math.sqrt(8.0F), -1, 1.326f, 1.7675f},
+			{-1, -1, -1, -1, -1},
+			{0.8838f, 1.326f, -1, 0.3535f, 0.5303f},
+			{1.326f, 1.7675f, -1, 0.5303f, 0.707f}
 	};
 }

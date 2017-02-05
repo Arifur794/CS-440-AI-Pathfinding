@@ -46,10 +46,10 @@ public class GridProperties {
 	};
 	
 	final float[][] DIAG_COSTS = {
-			{easyDiag,        easyHardDiag,    -1, easyDiag/2f,       easyHardDiag/2f},
-			{easyHardDiag,    hardDiag, 	   -1, easyHardDiag/2f,   hardDiag/2f},
-			{-1,              -1, 			   -1, -1, 				  -1},
-			{easyDiag/2f,     easyHardDiag/2f, -1, easyDiag/4.0f,     easyHardDiag/4.0f},
-			{easyHardDiag/2f, hardDiag/2f, 	   -1, easyHardDiag/4.0f, hardDiag/4.0f}
+			{easyDiag, easyHardDiag, -1, easyDiag/2f, easyHardDiag/2f},
+			{easyHardDiag, hardDiag, -1, easyHardDiag/2f, hardDiag/2f},
+			{-1, -1, -1, -1, -1},
+			{0.8838f, easyHardDiag/2f, -1, easyDiag/4.0f, easyHardDiag/4.0f},
+			{easyHardDiag/2f, hardDiag/2f, -1, easyHardDiag/4.0f, hardDiag/4.0f}
 	};
 }

@@ -76,10 +76,12 @@ public abstract class SearchAlgo {
 		ArrayList<Node> pathList = new ArrayList<Node>();
 		Node n = allNodes[goal.y][goal.x], p;
 		
+		int i = 1;
 		while(n != null) {
 			p = n.getParent();
 			pathList.add(n);
-			n = p;
+			n = p;	
+			i++;
 		}
 		path = new Node[pathList.size()];
 		path = pathList.toArray(path);
