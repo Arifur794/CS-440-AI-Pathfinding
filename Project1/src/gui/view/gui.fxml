@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<BorderPane stylesheets="@darktheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.GridController">
+   <center>
+      <ScrollPane prefHeight="645.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <content>
+            <GridPane fx:id="gridPane">
+            </GridPane>
+         </content>
+      </ScrollPane>
+   </center>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="645.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <items>
+                  
+               </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
