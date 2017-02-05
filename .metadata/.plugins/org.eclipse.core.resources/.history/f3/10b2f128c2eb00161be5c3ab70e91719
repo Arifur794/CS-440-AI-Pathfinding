@@ -66,7 +66,7 @@ public class MapGenerator extends Application {
 		try {
 			//Load the layout file
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MapGenerator.class.getResource("view/GridButtons.fxml"));
+			loader.setLocation(MapGenerator.class.getResource("view/GridOptions.fxml"));
 			StackPane stack = (StackPane) loader.load();
 			
 			//Insert in main file

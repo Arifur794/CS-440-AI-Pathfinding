@@ -17,7 +17,7 @@ public class GridController {
 	@FXML 
 	private GridPane gridPane;
 	private Grid grid;
-	private CellInfoDisplayController cellDisplay;
+	private CellDisplayController cellDisplay;
 	private Rectangle[][] displayRect;
 	
 	final double BUTTON_PADDING = 2;
@@ -37,7 +37,7 @@ public class GridController {
 		initGridGui(gridPane);
 	}
 	
-	public void setCellDisplayController(CellInfoDisplayController cdc) {
+	public void setCellDisplayController(CellDisplayController cdc) {
 		this.cellDisplay = cdc;
 	}
 	
@@ -79,7 +79,7 @@ public class GridController {
 		            		color = Color.WHITE;
 		            		break;
 		            	case HARD:
-		            		color = Color.GRAY;
+		            		color = Color.GREEN;
 		            		break;
 		            	case HIGHWAY_UNBLOCKED:
 		            		color = Color.BLUE;
@@ -123,7 +123,7 @@ public class GridController {
 		System.out.println("The cost of found A* path is: " +  pathFinder.calculateCost());
 		
 		for(Node n : path) {
-			this.displayRect[n.y][n.x].setFill(Color.GREEN);
+			this.displayRect[n.y][n.x].setFill(Color.PINK);
 		}
 		this.displayRect[start.y][start.x].setFill(Color.ORANGE);
 		this.displayRect[end.y][end.x].setFill(Color.RED);
