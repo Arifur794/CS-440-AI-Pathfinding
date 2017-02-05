@@ -83,6 +83,7 @@ public abstract class SearchAlgo {
 			n = p;	
 			i++;
 		}
+		System.out.println(pathList.size() + " " + i);
 		path = new Node[pathList.size()];
 		path = pathList.toArray(path);
 		return path;

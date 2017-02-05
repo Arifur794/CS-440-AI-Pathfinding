@@ -120,7 +120,7 @@ public class GridController {
 		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 		AStar pathFinder = new AStar(start, end, grid, heuristic);
 		Node[] path = pathFinder.run();
-		System.out.println("The cost of found A* path is: " +  pathFinder.calculateCost());
+		System.out.println(pathFinder.calculateCost());
 		
 		for(Node n : path) {
 			this.displayRect[n.y][n.x].setFill(Color.PINK);
@@ -135,7 +135,7 @@ public class GridController {
 		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 		WAStar pathFinder = new WAStar(start, end, grid, heuristic, 2f);
 		Node[] path = pathFinder.run();
-		System.out.println("The cost of found weighted A* path is: " + pathFinder.calculateCost());
+		System.out.println(pathFinder.calculateCost());
 		
 		for(Node n : path) {
 			this.displayRect[n.y][n.x].setFill(Color.GOLDENROD);
@@ -149,7 +149,7 @@ public class GridController {
 		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
 		UCS pathFinder = new UCS(start, end, grid);
 		Node[] path = pathFinder.run();
-		System.out.println("The cost of found UCS path is: " + pathFinder.calculateCost());
+		System.out.println(pathFinder.calculateCost());
 		
 		for(Node n : path) {
 			this.displayRect[n.y][n.x].setFill(Color.YELLOW);

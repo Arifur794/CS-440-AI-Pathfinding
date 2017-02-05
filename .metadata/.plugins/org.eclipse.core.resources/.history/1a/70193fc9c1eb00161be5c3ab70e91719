@@ -380,7 +380,7 @@ public class Grid {
 	}
 	
 	private float costTo(int ax, int ay, int bx, int by, int atype, int btype) {
-		if(ax == bx && ay == by) { // same cell
+		if(ax == bx || ay == by) { // same cell
 			return 0.0f;	
 		} else if( (ax == bx && Math.abs(ay - by) == 1) 
 				|| (ay == by && Math.abs(ax - bx) == 1)) { // horizontal neighbor

@@ -33,7 +33,7 @@ public class MapGenerator extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Map searcher");
+		this.primaryStage.setTitle("Heuristic Search");
 		
 		initGUI();
 	}
@@ -42,7 +42,7 @@ public class MapGenerator extends Application {
 		try {
 			//Load the layout file
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MapGenerator.class.getResource("view/map.fxml"));
+			loader.setLocation(MapGenerator.class.getResource("view/gui.fxml"));
 			rootLayout = (BorderPane) loader.load();
 			gridController = loader.getController();
 			

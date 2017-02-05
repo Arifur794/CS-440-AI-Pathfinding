@@ -20,6 +20,6 @@ public class DistanceHeuristic {
 	}
 	
 	public float getH(Node a) {
-		return ( 0.25f * (float) Math.sqrt( ((a.x - bx)*(a.x- bx)) + ((a.y-by)*(a.y-by)) ) ) / startToGoalDist;
+		return ( 0.50f * (float) Math.sqrt( ((a.x - bx)*(a.x- bx)) + ((a.y-by)*(a.y-by)) ) ) / startToGoalDist;
 	}
 }
