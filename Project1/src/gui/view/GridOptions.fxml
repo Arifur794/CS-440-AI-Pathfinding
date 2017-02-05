@@ -66,8 +66,8 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin>
             </Button>
-            <TextField fx:id="row" promptText="Enter new start/end row" />
             <TextField fx:id="column" promptText="Enter new start/end column" />
+            <TextField fx:id="row" promptText="Enter new start/end row" />
                            </children>
                         </VBox>
                      </children>
