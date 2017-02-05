@@ -394,7 +394,8 @@ public class Grid {
 				(newStart[1] <= GP.POINT_AREA - 1 && newStart[1] >= 0)) {
 			Cell newStartCell = this.grid[newStart[0]][newStart[1]];
 			Cell oldStart = this.grid[startCell[0]][startCell[1]];
-			if (newStartCell.celltype == CellType.BLOCKED) {
+			if (newStartCell.celltype == CellType.BLOCKED || newStartCell.celltype == CellType.HIGHWAY_UNBLOCKED
+					|| newStartCell.celltype == CellType.HIGHWAY_HARD) {
 				return false;
 			}
 			if(newStartCell.celltype == CellType.UNBLOCKED) {
@@ -421,7 +422,8 @@ public class Grid {
 				(newEnd[1] <= GP.POINT_AREA - 1 && newEnd[1] >= 0)) {
 			Cell newEndCell = this.grid[newEnd[0]][newEnd[1]];
 			Cell oldEnd = this.grid[endCell[0]][endCell[1]];
-			if (newEndCell.celltype == CellType.BLOCKED) {
+			if (newEndCell.celltype == CellType.BLOCKED || newEndCell.celltype == CellType.HIGHWAY_UNBLOCKED
+					|| newEndCell.celltype == CellType.HIGHWAY_HARD) {
 				return false;
 			}
 			if(newEndCell.celltype == CellType.UNBLOCKED) {

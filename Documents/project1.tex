@@ -7,7 +7,7 @@
 \documentclass[11pt]{article} % use larger type; default would be 10pt
 
 \usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
-
+\usepackage{hyperref}
 %%% Examples of Article customizations
 % These packages are optional, depending whether you want the features they provide.
 % See the LaTeX Companion or other references for full information.
@@ -63,10 +63,18 @@
 
 \section{The maps}
 
-Your text goes here.
+The map files are available at \url{https://github.com/Joshua-Westbrook/AIproject1maps}
+
+They are also in the folder that opens after unzipping the .zip file attached and importing it into Eclipse as an existing project.
 
 \section{The algorithm}
 
-More text.
+The algorimths can be found in in the searches package. The UCS algorithm is fully implemented in SearchAlgo.java but uses UCS.java so it has a specific name. A* and Weighted A* overwrite the h(n) being zero in UCS with them using either the heuristic from DistanceHeuristic.java or the heuristic times the weight. Unforunately the algorithms do not seem to be working fully properly. There is no error where Weighted A* sometimes returning a cheaper path than A*. We have not been able to figure out the cause yet.
+
+\section{Optimizations}
+No optimizations have been done beyond that of following the UCS/A*/Weighted A* rules.
+
+\section{Heuristics}
+The Heuristic we finally used is the pythagorean formula. We get the best path length from start to goal and from currNode to goal by giving one side of the triangle as the difference in rows, the other as the difference in columns, and getting that square root. We then times that distance between the currNode and goal by .25 since in a best case scenario the distance will be a river of normal to travel between the current node and the goal which has a travel time of .25. This makes the heuristic admissable because it is impossible for the actual travel distance to be less. We then divide the found best case scenario travel time by the best case scenario travel time from the start to the goal in a situation where the start and the goal are connected by a river.
 
 \end{document}

@@ -30,40 +30,48 @@ public abstract class SearchAlgo {
 	}
 	
 	public Node[] run() {
-		float cost = 0;
 		Node n = start;
-		n.gcost = gcostFunc(start, start);
-		n.hcost = hcostFunc(start);
-		addToFringe(start, n.gcost, n.hcost);
-			
+		addToFringe(n, null, gcostFunc(start, start), hcostFunc(start));
+		int i = 0;
 		while(!isFringeEmpty()) {
 			n = getNextNode();
-			cost = n.gcost;
-			exploreNode(n); 
+			exploreNode(n);
+			i++;
 			if(n.equals(goal)) {
+				System.out.println(i + " nodes were looked at before goal was found");
 				return unravelPath();
 			}
-			
 			for(Node nc : n.neighborList) {
 				if(nc.celltype == CellType.BLOCKED) {
 					continue;
 				}
-				float childCost = cost + gcostFunc(n, nc);
-				
-				if(!isExplored(nc) && !inFringe(nc)) {
-					nc.setParent(n);
-					addToFringe(nc, childCost, hcostFunc(nc));
-				} else if(inFringe(nc) && getNode(nc).gcost > childCost) {
-					removeFromFringe(nc);
-					nc.setParent(n);
-					addToFringe(nc, childCost, hcostFunc(nc));
-					getNode(nc).gcost = childCost;
+				float childCost = n.gcost + gcostFunc(n, nc);				
+				if(!isExplored(nc)) {
+					if(!inFringe(nc)) {
+						addToFringe(nc, n, Integer.MAX_VALUE, 0);
+					}
+					
+					if(childCost < nc.gcost) {
+						addToFringe(nc, n, childCost, hcostFunc(nc));
+					}
 				}
 			}
 		}
 		return null;
 	}
-	
+
+	public void addToFringe(Node n, Node p, float gcost, float hcost) {		
+		n.gcost = gcost;
+		n.hcost = hcost;
+		n.setParent(p);
+		if(inFringe(n)) {
+			fringe.remove(n);
+		}
+		fringe.add(n);
+		n.inFringe = true;
+		this.allNodes[n.y][n.x] = n;
+	}
+
 	public float gcostFunc(Node parent, Node child) {
 		return grid.costTo(parent, child);
 	}
@@ -97,14 +105,6 @@ public abstract class SearchAlgo {
 		return (isThere == null) ? false : isThere.isExplored;
 	}
 	
-	public void addToFringe(Node n, float gcost, float hcost) {
-		if(!fringe.contains(n)) {
-			n.gcost = gcost; n.hcost = hcost;
-			fringe.add(n);
-			n.inFringe = true;
-		}
-	}
-	
 	public Node getNextNode() {	
 		return fringe.remove();
 	}
@@ -132,7 +132,8 @@ public abstract class SearchAlgo {
 	
 	public float calculateCost() {
 		if(path == null) {
-			throw new NullPointerException("The path is null. The algorithm may not have run.");
+			System.out.println("The path is null. There is no path or the algorithm failed to run");
+			return -1f;
 		}
 		
 		float cost = 0;

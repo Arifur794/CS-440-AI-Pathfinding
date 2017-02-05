@@ -119,13 +119,15 @@ public class GridController {
 		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 		AStar pathFinder = new AStar(start, end, grid, heuristic);
 		Node[] path = pathFinder.run();
-		System.out.println("The cost of found A* path is: " +  pathFinder.calculateCost());
-		
-		for(Node n : path) {
-			this.displayRect[n.y][n.x].setFill(Color.GREEN);
+		float cost = pathFinder.calculateCost();
+		System.out.println("The cost of found A* path is: " + cost);
+		if (cost!= -1.0f) {
+			for(Node n : path) {
+				this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+			}
+			this.displayRect[start.y][start.x].setFill(Color.ORANGE);
+			this.displayRect[end.y][end.x].setFill(Color.RED);
 		}
-		this.displayRect[start.y][start.x].setFill(Color.ORANGE);
-		this.displayRect[end.y][end.x].setFill(Color.RED);
 	}
 	
 	public void runWAStar(float w) {
@@ -134,13 +136,15 @@ public class GridController {
 		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 		WAStar pathFinder = new WAStar(start, end, grid, heuristic, w);
 		Node[] path = pathFinder.run();
-		System.out.println("The cost of found weighted A* path is: " + pathFinder.calculateCost());
-		
-		for(Node n : path) {
-			this.displayRect[n.y][n.x].setFill(Color.GOLDENROD);
+		float cost = pathFinder.calculateCost();
+		System.out.println("The cost of found Weighted A* path with weight of " + w + " is: " + cost);
+		if (cost!= -1.0f) {
+			for(Node n : path) {
+				this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+			}
+			this.displayRect[start.y][start.x].setFill(Color.ORANGE);
+			this.displayRect[end.y][end.x].setFill(Color.RED);
 		}
-		this.displayRect[start.y][start.x].setFill(Color.ORANGE);
-		this.displayRect[end.y][end.x].setFill(Color.RED);
 	}
 
 	public void runUCS() {
@@ -148,12 +152,15 @@ public class GridController {
 		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
 		UCS pathFinder = new UCS(start, end, grid);
 		Node[] path = pathFinder.run();
-		System.out.println("The cost of found UCS path is: " + pathFinder.calculateCost());
-		
-		for(Node n : path) {
-			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+		float cost = pathFinder.calculateCost();
+		System.out.println("The cost of found UCS path is: " + cost);
+		if (cost!= -1.0f) {
+			for(Node n : path) {
+				this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+			}
+			this.displayRect[start.y][start.x].setFill(Color.ORANGE);
+			this.displayRect[end.y][end.x].setFill(Color.RED);
 		}
-		this.displayRect[start.y][start.x].setFill(Color.ORANGE);
-		this.displayRect[end.y][end.x].setFill(Color.RED);
+		
 	}
 }
