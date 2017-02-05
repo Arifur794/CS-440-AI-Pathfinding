@@ -107,8 +107,8 @@ public class GridFile {
 			});
 			linesRead = 0;
 			
-			Cell startCell = grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1);
-			Cell endCell = grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1);
+			Cell startCell = grid.getCell(grid.startCell[0] + 1, grid.startCell[1] + 1);
+			Cell endCell = grid.getCell(grid.endCell[0] + 1, grid.endCell[1] + 1);
 			
 			if(startCell.celltype == CellType.UNBLOCKED) {
 				startCell.convertTo(CellType.START_POINT_UNBLOCKED);

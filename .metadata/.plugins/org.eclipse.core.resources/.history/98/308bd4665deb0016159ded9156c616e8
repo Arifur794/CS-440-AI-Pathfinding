@@ -71,9 +71,9 @@ public class GridFile {
 					int a = Integer.parseInt(sarr[0]), b = Integer.parseInt(sarr[1]);
 					
 					if(linesRead == 1) { // read start cell
-						grid.startCell[0] = a; grid.startCell[1] = b;
+						grid.startCell[0] = b; grid.startCell[1] = a;
 					} else if(linesRead == 2) { // read end cell
-						grid.endCell[0] = a; grid.endCell[1] = b;
+						grid.endCell[0] = b; grid.endCell[1] = a;
 					} else { // read hard cells centers
 						grid.hardCellsCenters[linesRead - 3][0] = a;
 						grid.hardCellsCenters[linesRead - 3][1] = b;
@@ -107,8 +107,8 @@ public class GridFile {
 			});
 			linesRead = 0;
 			
-			Cell startCell = grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1);
-			Cell endCell = grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1);
+			Cell startCell = grid.getCell(grid.startCell[0], grid.startCell[1]);
+			Cell endCell = grid.getCell(grid.endCell[0], grid.endCell[1]);
 			
 			if(startCell.celltype == CellType.UNBLOCKED) {
 				startCell.convertTo(CellType.START_POINT_UNBLOCKED);

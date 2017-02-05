@@ -146,7 +146,7 @@ public class GridController {
 		System.out.println(pathFinder.calculateCost());
 		
 		for(Node n : path) {
-			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+			this.displayRect[n.x][n.y].setFill(Color.YELLOW);
 		}
 	}
 }

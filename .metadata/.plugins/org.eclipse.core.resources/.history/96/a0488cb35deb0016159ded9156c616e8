@@ -113,8 +113,8 @@ public class GridController {
 	}
 	
 	public void runAStar() {
-		Node start = new Node(grid.getCell(grid.startCell[0] + 1, grid.startCell[1] + 1));
-		Node end = new Node(grid.getCell(grid.endCell[0] + 1, grid.endCell[1] + 1));
+		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
 		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 		AStar pathFinder = new AStar(start, end, grid, heuristic);
 		Node[] path = pathFinder.run();
@@ -126,8 +126,8 @@ public class GridController {
 	}
 	
 	public void runWAStar() {
-		Node start = new Node(grid.getCell(grid.startCell[0] + 1, grid.startCell[1] + 1));
-		Node end = new Node(grid.getCell(grid.endCell[0] + 1, grid.endCell[1] + 1));
+		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
 		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 		WAStar pathFinder = new WAStar(start, end, grid, heuristic, 2);
 		Node[] path = pathFinder.run();

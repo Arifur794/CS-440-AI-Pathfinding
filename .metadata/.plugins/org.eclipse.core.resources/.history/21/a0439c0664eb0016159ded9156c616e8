@@ -133,7 +133,7 @@ public abstract class SearchAlgo {
 	}
 	
 	public Node getNode(Node n) {
-		return this.allNodes[n.y][n.x];
+		return this.allNodes[n.y - 1][n.x - 1];
 	}
 	
 	public float calculateCost() {

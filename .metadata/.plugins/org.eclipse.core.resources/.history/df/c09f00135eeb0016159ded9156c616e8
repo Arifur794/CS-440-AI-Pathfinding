@@ -139,8 +139,8 @@ public class GridController {
 	}
 
 	public void runUCS() {
-		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
-		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+		Node start = new Node(grid.getCell(grid.startCell[0] + 1, grid.startCell[1] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[0] + 1, grid.endCell[1] + 1));
 		UCS pathFinder = new UCS(start, end, grid);
 		Node[] path = pathFinder.run();
 		System.out.println(pathFinder.calculateCost());
