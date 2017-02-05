@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import searches.Node;
 
 public class GridController {
 	@FXML 
@@ -105,5 +106,20 @@ public class GridController {
 	public void changeGrid(Grid grid) {
 		this.grid = grid;
 		colorGrid();
+	}
+	
+	public void runAStar() {
+		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+	}
+	
+	public void runWAStar() {
+		Node start = new Node(grid.getCell(grid.startCell[0], grid.startCell[1]));
+		Node end = new Node(grid.getCell(grid.endCell[0], grid.endCell[1]));
+	}
+
+	public void runUCS() {
+		Node start = new Node(grid.getCell(grid.startCell[0], grid.startCell[1]));
+		Node end = new Node(grid.getCell(grid.endCell[0], grid.endCell[1]));
 	}
 }

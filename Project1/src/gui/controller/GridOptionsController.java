@@ -2,7 +2,7 @@ package gui.controller;
 
 import java.io.File;
 
-import files.GridFile;
+import fileHandler.GridFile;
 import gui.model.Grid;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -44,7 +44,15 @@ public class GridOptionsController {
 		});
 		
 		findPath.setOnMouseClicked(e -> {
-			System.out.println("This should generate the path and changeGrid with its new version or something");
+			gridCtrl.runAStar();
+		});
+		
+		findPath2.setOnMouseClicked(e -> {
+			gridCtrl.runUCS();
+		});
+		
+		findPath3.setOnMouseClicked(e -> {
+			gridCtrl.runWAStar();
 		});
 		
 		changeStart.setOnMouseClicked(e -> {

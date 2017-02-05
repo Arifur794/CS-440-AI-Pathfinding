@@ -22,7 +22,7 @@ public class CellDisplayController {
 	public void initialize() {}
 	
 	public void showInfo(Cell c) {
-		coordinates.setText(c.x + ", " + c.y);
+		coordinates.setText(c.y + ", " + c.x);
 		cellType.setText(""+c.celltype);
 	}
 }

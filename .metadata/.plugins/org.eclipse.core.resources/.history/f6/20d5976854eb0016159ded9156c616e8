@@ -1,0 +1,7 @@
+package searches;
+
+import gui.model.Cell;
+
+public class Node extends Cell {
+	
+}
