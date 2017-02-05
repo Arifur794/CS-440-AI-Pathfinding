@@ -123,7 +123,7 @@ public class GridController {
 		System.out.println("The cost of found A* path is: " + cost);
 		if (cost!= -1.0f) {
 			for(Node n : path) {
-				this.displayRect[n.y][n.x].setFill(Color.GOLDENROD);
+				this.displayRect[n.y][n.x].setFill(Color.YELLOW);
 			}
 			this.displayRect[start.y][start.x].setFill(Color.ORANGE);
 			this.displayRect[end.y][end.x].setFill(Color.RED);
