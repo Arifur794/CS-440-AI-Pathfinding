@@ -151,6 +151,5 @@ public class GridController {
 			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
 		}
 		this.displayRect[start.y][start.x].setFill(Color.ORANGE);
-		this.displayRect[end.y][end.x].setFill(Color.RED);
 	}
 }

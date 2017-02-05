@@ -103,7 +103,7 @@ public class GridController {
 	            	}
 	            	rect = new Rectangle(CELL_SIZE, CELL_SIZE, color);
 	            	addClick(rect, c, r);
-	            	this.displayRect[r - 1][c - 1] = rect;
+	            	this.displayRect[r][c] = rect;
 	            	gridPane.add(rect, c, r);           
 	        }
 	    }
@@ -150,7 +150,5 @@ public class GridController {
 		for(Node n : path) {
 			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
 		}
-		this.displayRect[start.y][start.x].setFill(Color.ORANGE);
-		this.displayRect[end.y][end.x].setFill(Color.RED);
 	}
 }

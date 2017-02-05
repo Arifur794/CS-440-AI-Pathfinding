@@ -19,7 +19,6 @@ public class GridController {
 	private Grid grid;
 	private CellDisplayController cellDisplay;
 	private Rectangle[][] displayRect;
-	
 	final double BUTTON_PADDING = 2;
 	final int ROWS = 120; 
 	final int COLS = 160;
@@ -103,7 +102,6 @@ public class GridController {
 	            	}
 	            	rect = new Rectangle(CELL_SIZE, CELL_SIZE, color);
 	            	addClick(rect, c, r);
-	            	this.displayRect[r - 1][c - 1] = rect;
 	            	gridPane.add(rect, c, r);           
 	        }
 	    }
@@ -148,9 +146,9 @@ public class GridController {
 		System.out.println(pathFinder.calculateCost());
 		
 		for(Node n : path) {
-			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+			System.out.println(n);
+			this.displayRect[0][0].setFill(Color.YELLOW);
+			//this.displayRect[n.y][n.x].setFill(Color.YELLOW);
 		}
-		this.displayRect[start.y][start.x].setFill(Color.ORANGE);
-		this.displayRect[end.y][end.x].setFill(Color.RED);
 	}
 }
