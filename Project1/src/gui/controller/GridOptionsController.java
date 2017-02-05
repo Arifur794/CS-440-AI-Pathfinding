@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class GridOptionsController {
 
 	@FXML
-	private Button importMap, exportMap;
+	private Button importMap, exportMap, findPath;
 	
 	private GridController gridCtrl;
 	private FileChooser fileChoose = new FileChooser();
@@ -34,6 +34,10 @@ public class GridOptionsController {
 			if(file != null) {
 				GridFile.exportFile(grid, file);
 			}
+		});
+		
+		findPath.setOnMouseClicked(e -> {
+			System.out.println("This should generate the path and changeGrid with its new version or something");
 		});
 	}
 	

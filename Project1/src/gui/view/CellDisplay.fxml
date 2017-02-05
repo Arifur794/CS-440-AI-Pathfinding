@@ -24,7 +24,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Cooridinates" />
+                                    <Label text="Coordinates" />
                                     <Label text="Cell Type" GridPane.rowIndex="1" />
                                     <Label GridPane.columnIndex="1" fx:id="coordinates" text=""/>
                                     <Label GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="cellType" text=""/>
