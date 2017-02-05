@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.9.18)  5 FEB 2017 17:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.9.18)  5 FEB 2017 17:19
 entering extended mode
 **project1.tex
 (project1.tex
@@ -634,14 +634,14 @@ Overfull \hbox (7.86378pt too wide) in paragraph at lines 66--67
 
 [1
 
-{C:/Users/Joshua/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 90.
- [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 90.
-
-(project1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 90.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 90.
+{C:/Users/Joshua/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
+[3]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 160.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 160.
+ (project1.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 160.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 160.
 
 
 Package rerunfilecheck Warning: File `project1.out' has changed.
@@ -649,16 +649,16 @@ Package rerunfilecheck Warning: File `project1.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `project1.out':
-(rerunfilecheck)             Before: 54ECF439818DE331A9411A52317D0FA3;188
-(rerunfilecheck)             After:  41962EEEFB009675C4886629A6C68F7D;287.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 90.
+(rerunfilecheck)             Before: 15C93E23A2EBC594DC49D54A43DF74B3;418
+(rerunfilecheck)             After:  221C5D481E685B01DCA5A2DD622B72A5;1111.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 160.
  ) 
 Here is how much of TeX's memory you used:
- 7534 strings out of 493698
- 112344 string characters out of 3146021
- 207086 words of memory out of 3000000
- 10793 multiletter control sequences out of 15000+200000
- 8965 words of font info for 32 fonts, out of 3000000 for 9000
+ 7560 strings out of 493698
+ 112751 string characters out of 3146021
+ 208092 words of memory out of 3000000
+ 10804 multiletter control sequences out of 15000+200000
+ 10780 words of font info for 38 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  44i,10n,43p,531b,325s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program
@@ -666,13 +666,14 @@ Here is how much of TeX's memory you used:
 /fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb
-><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program
- Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmtt10.pfb>
-Output written on project1.pdf (2 pages, 112977 bytes).
+><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program
+ Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Files/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmtt10.pfb>
+Output written on project1.pdf (4 pages, 129584 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
- 9 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 114 PDF objects out of 1000 (max. 8388607)
+ 22 named destinations out of 1000 (max. 500000)
+ 65 words of extra memory for PDF output out of 10000 (max. 10000000)
 
