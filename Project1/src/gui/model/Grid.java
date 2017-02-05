@@ -9,15 +9,9 @@ import gui.model.Cell.CellType;
 import gui.model.Cell.HighwayDirection;
 
 
-/*
- * This class implements the grid data structure using the Cells
- *  <--width-->
- * ^
- * |
- * height
- * |
- * v
- * The grid is enumerated from 1 to ROW and 1 to COL inclusive.
+/*The grid itself. It goes from 0 to width and height - 1. GridController gives the rows and columns.
+ * Columns is the width and grid is the height 
+ * The Top left is 0, 0 and the bottom right is 119, 159
  */
 public class Grid {
 	private final int width;
@@ -52,8 +46,8 @@ public class Grid {
 	
 	public void createGrid() {
 		this.createHardCells();
-		while(!this.createHighways()) { // keep trying if highway cells don't happen
-			this.removeHighwayCells();
+		while(!this.createHighways()) { //makes it so we run create highways again until we do so successfully and get true.
+			this.removeHighwayCells(); //clears the highway cells from a failed attempt to make the highways
 		}
 		this.createBlockedCells();
 		this.createStartAndEnd();
@@ -62,14 +56,14 @@ public class Grid {
 	private void createHardCells() {
 		// create hard cells
 		for(int i = 0; i < GP.NUM_HARD_CELL_CTR; i++) {
-			// calculate random center for hard cell
+			//gets the random center of the hard cell area
 			int center_x = random(0, this.getWidth() - 1);
 			int center_y = random(0, this.getHeight() - 1);
 			
 			this.hardCellsCenters[i][0] = center_x;
 			this.hardCellsCenters[i][1] = center_y;
 			
-			// calculate the start and end points for the hard cells region
+			// gets the starting and ending x and y for the hard cell area
 			int start_x = center_x - GP.HARD_CELL_REGION/2;
 			int end_x = start_x + GP.HARD_CELL_REGION;
 			int start_y = center_y - GP.HARD_CELL_REGION/2;
@@ -91,6 +85,7 @@ public class Grid {
 				end_y = getHeight();
 			}
 			
+			//goes through hard cell area and rolls a random number which determines if it is a hard cell or not
 			for(int j = start_x; j < end_x; j++) {
 				for(int k = start_y; k < end_y; k++) {
 					float hardCellChance = random(0, 10)/10.0f;
@@ -104,6 +99,7 @@ public class Grid {
 	
 	/*
 	 * Tries to create the number of highways specified in Grid properties
+	 * Returns true if successful and false if not
 	 */
 	private boolean createHighways() {
 		for(int i = 0; i < GP.NUM_HIGHWAYS; i++) {
@@ -111,7 +107,7 @@ public class Grid {
 			while(!createHighway() && tries < this.MAX_HIGHWAY_TRIES) { 
 				tries++;
 			}
-			if(tries == this.MAX_HIGHWAY_TRIES) {
+			if(tries >= this.MAX_HIGHWAY_TRIES) {
 				return false;
 			}
 		}
@@ -120,8 +116,7 @@ public class Grid {
 	
 	/*
 	 * Creates a single highway
-	 * @return created If it failed to create it, returns false
-	 * else returns true
+	 * returns true if it was created and false if it was not created
 	 */
 	private boolean createHighway() {
 		int[] boundaryCell = this.getRandomBoundary();
@@ -139,11 +134,11 @@ public class Grid {
 		}
 		
 		Cell c = this.grid[b_y][b_x];
-		if(c.isHighway()) { // already on highway
+		if(c.isHighway()) { // if try to go somewhere already on highway return false
 			return false;
 		}
 		
-		LinkedList<Integer> addedItems = new LinkedList<Integer>(); // to store cells that have been made into highways and remove them if highway is invalid
+		LinkedList<Integer> addedItems = new LinkedList<Integer>(); // store cells that have been made into highways for removal if invalid
 		c.makeHighway(hdir); // make the starting cell a highway
 		addedItems.add(b_x);
 		addedItems.add(b_y);
@@ -153,7 +148,7 @@ public class Grid {
 			
 			for(int i = 0; i < GP.NUM_HIGHWAY_CELLS; i++) {
 				int[] newCell = translate(b_x, b_y, hdir, 1);
-				if(newCell == null) { // outside bounds - check if highway is done
+				if(newCell == null) { // happens if highway hits the outside bounds
 					if(numCells >= GP.MIN_HIGHWAY_LEN){
 						return true;
 					} else {
@@ -164,7 +159,7 @@ public class Grid {
 				b_x = newCell[0]; b_y = newCell[1];
 				
 				c = this.grid[b_y][b_x];
-				if(c.isHighway()) { // hit a highway
+				if(c.isHighway()) { // happens if you run into another highway
 					removeHighwayCells(addedItems);
 					return false;
 				}
@@ -182,7 +177,7 @@ public class Grid {
 				}
 			}
 			
-			float changeDir = random(0, 10)/10f; // changing direction
+			float changeDir = random(0, 10)/10f; // rolls a random number to see if direction changes
 			if(changeDir <= GP.HIGHWAY_CHG_DIR1_PRB) { // perpendicular direction 1
 				hdir = (hdir == HighwayDirection.UP || hdir == HighwayDirection.DOWN) 
 						? HighwayDirection.LEFT : HighwayDirection.UP;
@@ -291,7 +286,7 @@ public class Grid {
 		SectionType startRow, endRow, startCol, endCol;
 		Cell start, end;
 		while(true) {
-			//choose top 20 rows or bottom 20 rows for start row
+			//chooses randomly where start and end will be
 			if(random(0, 1) < 0.5) {
 				startRow = SectionType.TOP_ROW;
 			} else {
@@ -385,7 +380,7 @@ public class Grid {
 		} else if( (ax == bx && Math.abs(ay - by) == 1) 
 				|| (ay == by && Math.abs(ax - bx) == 1)) { // horizontal neighbor
 			return GP.HOR_VER_COSTS[atype][btype];
-		} else if( Math.abs(ax - bx) == 1 && Math.abs(ay - by) == 1) { // Diagonal
+		} else if( Math.abs(ax - bx) == 1 && Math.abs(ay - by) == 1) { // Diagonal neighbor
 			return GP.DIAG_COSTS[atype][btype];
 		} 
 		return -1;

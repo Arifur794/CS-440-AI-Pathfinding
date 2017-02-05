@@ -13,8 +13,8 @@ public class Cell {
 		NONE, UP, DOWN, LEFT, RIGHT
 	}
 	
-	public int x, y;             // upper left coordinates of the cell
-	public CellType celltype;	  // celltype of the cell
+	public int x, y;             // upper left coordinates of the cell. 0, 0 is top left and 119, 159 is bottom right
+	public CellType celltype;	  // what the type of the cell is
 	public HighwayDirection dir; // direction of the highway - NONE by default
 	
 	

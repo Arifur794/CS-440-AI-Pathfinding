@@ -2,7 +2,7 @@ package gui.controller;
 
 import java.io.File;
 
-import fileHandler.GridFile;
+import fileHandler.GridFileManager;
 import gui.model.Grid;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -25,42 +25,50 @@ public class GridOptionsController {
 	@FXML
 	public void initialize() {
 		
+		//opens a file browser in the directory that can choose to import whichever file the user wants. Will crash if bad file is given.
 		importMap.setOnMouseClicked(e -> {
 			fileChoose.setInitialDirectory(new File("./"));
 			File file = fileChoose.showOpenDialog(stage);
 			if(file != null) {
-				Grid grid = GridFile.importFile(file.getAbsolutePath(), gridCtrl.ROWS, gridCtrl.COLS);
+				Grid grid = GridFileManager.importFile(file.getAbsolutePath(), gridCtrl.ROWS, gridCtrl.COLS);
 				gridCtrl.changeGrid(grid);
 			}
 		});
 		
+		
+		//opens a file browser for the user to save the current map to. DOES NOT SAVE ANYTHING TO DO WITH SEARCHES
 		exportMap.setOnMouseClicked(e -> {
 			Grid grid = gridCtrl.getGrid();
 			fileChoose.setInitialDirectory(new File("./"));
 			File file = fileChoose.showSaveDialog(stage);
 			if(file != null) {
-				GridFile.exportFile(grid, file);
+				GridFileManager.exportFile(grid, file);
 			}
 		});
 		
+		//runs AStar search
 		findPath.setOnMouseClicked(e -> {
 			gridCtrl.runAStar();
 		});
 		
+		//runs UCS
 		findPath2.setOnMouseClicked(e -> {
 			gridCtrl.runUCS();
 		});
 		
+		//runs Weighted A  Star Search
 		findPath3.setOnMouseClicked(e -> {
 			gridCtrl.runWAStar();
 		});
 		
+		//tries to change the location of the start. DOES NOT CHECK IF NEW START IS WITHIN 100 OF END.
 		changeStart.setOnMouseClicked(e -> {
 			try {
 				int[] newStart = {0, 0};
 				newStart[0] = Integer.parseInt(row.getText());
 				newStart[1] = Integer.parseInt(column.getText());
 				Grid grid = gridCtrl.getGrid();
+				//tries to change the start of the current map. If invalid location such as a blocked one is given has a pop up telling user they gave bad start
 				boolean changed = grid.changeStart(newStart);
 				if (changed) {
 					gridCtrl.colorGrid();
@@ -81,12 +89,14 @@ public class GridOptionsController {
 			
 		});
 		
+		//tries to change the location of hte end. DOES NOT CHECK IF NEW END IS WITHIN 100 OF START.
 		changeEnd.setOnMouseClicked(e -> {
 			try {
 				int[] endStart = {0, 0};
 				endStart[0] = Integer.parseInt(row.getText());
 				endStart[1] = Integer.parseInt(column.getText());
 				Grid grid = gridCtrl.getGrid();
+				//tries to change the end of the current map. If invalid location such as a blocked one is given has a pop up telling user they gave bad end
 				boolean changed = grid.changeEnd(endStart);
 				if (changed) {
 					gridCtrl.colorGrid();
