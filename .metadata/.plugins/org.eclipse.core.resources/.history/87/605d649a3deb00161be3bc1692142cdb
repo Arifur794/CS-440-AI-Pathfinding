@@ -292,25 +292,17 @@ public class Grid {
 			//choose top 20 rows or bottom 20 rows for start row
 			if(random(0, 1) < 0.5) {
 				startRow = SectionType.TOP_ROW;
-			} else {
-				startRow = SectionType.BOT_ROW;
-			}
-			
-			if(random(0, 1) < 0.5) {
-				startCol = SectionType.LEFT_COL;
-			} else {
-				startCol = SectionType.RIGHT_COL;
-			}
-			
-			if(random(0, 1) < 0.5) {
 				endRow = SectionType.BOT_ROW;
 			} else {
+				startRow = SectionType.BOT_ROW;
 				endRow = SectionType.TOP_ROW;
 			}
 			
 			if(random(0, 1) < 0.5) {
+				startCol = SectionType.LEFT_COL;
 				endCol = SectionType.RIGHT_COL;
 			} else {
+				startCol = SectionType.RIGHT_COL;
 				endCol = SectionType.LEFT_COL;
 			}
 			int startY = this.pickRandomCellInSection(startRow);
