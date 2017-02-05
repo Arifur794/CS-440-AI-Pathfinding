@@ -30,8 +30,6 @@ public abstract class SearchAlgo {
 	}
 	
 	public Node[] run() {
-		System.out.println("------");
-		
 		float cost = 0;
 		Node n = start;
 		n.gcost = gcostFunc(start, start);
@@ -50,7 +48,7 @@ public abstract class SearchAlgo {
 				if(nc.celltype == CellType.BLOCKED) {
 					continue;
 				}
-				float childCost = cost + gcostFunc(n, nc); // g(n) + c(n, nc)
+				float childCost = cost + gcostFunc(n, nc);
 				
 				if(!isExplored(nc) && !inFringe(nc)) {
 					nc.setParent(n);
@@ -76,7 +74,6 @@ public abstract class SearchAlgo {
 	
 	public Node[] unravelPath() {
 		ArrayList<Node> pathList = new ArrayList<Node>();
-		//pathList.add(goal);
 		Node n = allNodes[goal.y][goal.x], p;
 		
 		int i = 1;

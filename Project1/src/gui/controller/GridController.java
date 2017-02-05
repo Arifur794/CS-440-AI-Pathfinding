@@ -123,8 +123,10 @@ public class GridController {
 		System.out.println(pathFinder.calculateCost());
 		
 		for(Node n : path) {
-			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+			this.displayRect[n.y][n.x].setFill(Color.PINK);
 		}
+		this.displayRect[start.y][start.x].setFill(Color.ORANGE);
+		this.displayRect[end.y][end.x].setFill(Color.RED);
 	}
 	
 	public void runWAStar() {
@@ -136,8 +138,10 @@ public class GridController {
 		System.out.println(pathFinder.calculateCost());
 		
 		for(Node n : path) {
-			this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+			this.displayRect[n.y][n.x].setFill(Color.GOLDENROD);
 		}
+		this.displayRect[start.y][start.x].setFill(Color.ORANGE);
+		this.displayRect[end.y][end.x].setFill(Color.RED);
 	}
 
 	public void runUCS() {

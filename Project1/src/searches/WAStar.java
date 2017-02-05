@@ -12,8 +12,14 @@ public class WAStar extends SearchAlgo {
 		this.h = h;
 		this.weight = weight;
 	}
-
-	public float costFunc(Node parent, Node child) {
+	
+	@Override
+	public float gcostFunc(Node parent, Node child) {
 		return grid.costTo(parent, child) + weight * h.getH(child);
+	}
+	
+	@Override
+	public float hcostFunc(Node n) {
+		return h.getH(n);
 	}
 }
