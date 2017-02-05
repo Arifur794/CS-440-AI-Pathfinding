@@ -26,7 +26,7 @@ public class DistanceHeuristic {
 		//it is then divided by the modified Euclidean Distance from start to goal to see how they compare
 		return ( 0.25f * (float) Math.sqrt( ((a.x - ex)*(a.x- ex)) + ((a.y-ey)*(a.y-ey)) ) ) / startToGoalDist;
 		
-		//same as above but get half of it instead. Not admissable because not a best case scenario for effort required to travel
+		//same as above but get half of it instead. Not admissable because not a best case scenario for traveling along the diagonal
 		//return ( 0.50f * ((float) Math.sqrt( ((a.x - ex)*(a.x- ex)) + ((a.y-ey)*(a.y-ey)) ) ) ) / startToGoalDist; 
 		
 		//See above

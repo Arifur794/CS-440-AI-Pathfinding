@@ -75,6 +75,16 @@ The algorimths can be found in in the searches package. The UCS algorithm is ful
 No optimizations have been done beyond that of following the UCS/A*/Weighted A* rules.
 
 \section{Heuristics}
-The Heuristic we finally used is the pythagorean formula. We get the best path length from start to goal and from currNode to goal by giving one side of the triangle as the difference in rows, the other as the difference in columns, and getting that square root. We then times that distance between the currNode and goal by .25 since in a best case scenario the distance will be a river of normal to travel between the current node and the goal which has a travel time of .25. This makes the heuristic admissable because it is impossible for the actual travel distance to be less. We then divide the found best case scenario travel time by the best case scenario travel time from the start to the goal in a situation where the start and the goal are connected by a river.
+The Heuristic we finally used was a modified Euclidean distance . We then multiply the Euclidean distance between the currNode and goal by .25 and the start node and the goal by 0.25 since in a best case scenario the entire path to the goal is an highway/river with no hard to travel in which case all movements is the distance divided by 4 which is the same thing as times 0.25
+The formula for the heuristic is $\frac{0.25 * \sqrt{(currNode.x - end.x)^2 + (currNode.y - end.y)^2}}{0.25 * \sqrt{(start.x - end.x)^2 + (start.y - end.y)^2}}$.
+
+Other attempted heuristics included just the Euclidean distance which was not admissable. We also tried using numbers like 0.50 or 0.75 instead of 0.25 when modifying the Euclidean  Distance but those failed. Our first attempt was to use just the Euclidean distance from the currNode to the goal which also failed to be admissable.
+
+\section{benchmarks}
+TBD
+
+\section{Final Explanation}
+
+
 
 \end{document}
