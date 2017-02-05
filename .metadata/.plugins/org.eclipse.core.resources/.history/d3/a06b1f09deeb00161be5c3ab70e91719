@@ -128,11 +128,11 @@ public class GridController {
 		this.displayRect[end.y][end.x].setFill(Color.RED);
 	}
 	
-	public void runWAStar(float w) {
+	public void runWAStar() {
 		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
 		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
 		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
-		WAStar pathFinder = new WAStar(start, end, grid, heuristic, w);
+		WAStar pathFinder = new WAStar(start, end, grid, heuristic, 2f);
 		Node[] path = pathFinder.run();
 		System.out.println("The cost of found weighted A* path is: " + pathFinder.calculateCost());
 		

@@ -58,16 +58,8 @@ public class GridOptionsController {
 		
 		//runs Weighted A  Star Search
 		findPath3.setOnMouseClicked(e -> {
-			try {
-				float w = Float.parseFloat(weight.getText());
-				gridCtrl.runWAStar(w);
-			} catch(Exception ex) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Error");
-				alert.setHeaderText("No weight");
-				alert.setContentText("You did not give the weight");
-				alert.showAndWait();
-			}
+			int w = Integer.parseInt(weight.getText());
+			gridCtrl.runWAStar();
 		});
 		
 		//tries to change the location of the start. DOES NOT CHECK IF NEW START IS WITHIN 100 OF END.

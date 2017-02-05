@@ -59,7 +59,7 @@ public class GridOptionsController {
 		//runs Weighted A  Star Search
 		findPath3.setOnMouseClicked(e -> {
 			try {
-				float w = Float.parseFloat(weight.getText());
+				int w = Integer.parseInt(weight.getText());
 				gridCtrl.runWAStar(w);
 			} catch(Exception ex) {
 				Alert alert = new Alert(AlertType.INFORMATION);
