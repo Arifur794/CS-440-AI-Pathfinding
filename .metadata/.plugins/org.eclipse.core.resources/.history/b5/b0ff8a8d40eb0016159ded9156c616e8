@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class GridOptionsController {
 
 	@FXML
-	private Button importMap, exportMap, findPath, findPath2, findPath3, changeStart, changeEnd;
+	private Button importMap, exportMap, findPath;
 	
 	private GridController gridCtrl;
 	private FileChooser fileChoose = new FileChooser();
