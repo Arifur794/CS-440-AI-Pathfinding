@@ -12,6 +12,8 @@ public class AStar extends SearchAlgo {
 		this.h = h;
 	}
 	
+	
+	
 	@Override
 	public float hcostFunc(Node n) {
 		return h.getH(n);

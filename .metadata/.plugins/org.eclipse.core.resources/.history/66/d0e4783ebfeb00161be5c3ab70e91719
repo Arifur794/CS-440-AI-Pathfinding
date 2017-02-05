@@ -8,9 +8,13 @@ public class WAStar extends SearchAlgo {
 	private float weight;
 	
 	public WAStar(Node start, Node goal, Grid grid, DistanceHeuristic h, float weight) {
-		super(start, goal, grid);
-		this.h = h;
+		super(start, goal, grid, h);	
 		this.weight = weight;
+	}
+	
+	@Override
+	public float gcostFunc(Node parent, Node child) {
+		return grid.costTo(parent, child) + weight * h.getH(child);
 	}
 	
 	@Override

@@ -3,18 +3,23 @@ package searches;
 import gui.model.Grid;
 import heuristics.DistanceHeuristic;
 
-public class WAStar extends SearchAlgo {
+public class WAStar extends Astar {
 	private DistanceHeuristic h;
 	private float weight;
 	
 	public WAStar(Node start, Node goal, Grid grid, DistanceHeuristic h, float weight) {
-		super(start, goal, grid);
+		super(start, goal, grid);	
 		this.h = h;
 		this.weight = weight;
 	}
 	
+	/*@Override
+	public float gcostFunc(Node parent, Node child) {
+		return grid.costTo(parent, child) + weight * h.getH(child);
+	}*/
+	
 	@Override
 	public float hcostFunc(Node n) {
-		return h.getH(n) * weight;
+		return h.getH(n);
 	}
 }

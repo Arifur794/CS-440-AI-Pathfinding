@@ -133,7 +133,7 @@ public class GridController {
 		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
 		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
 		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
-		WAStar pathFinder = new WAStar(start, end, grid, heuristic, 2f);
+		WAStar pathFinder = new WAStar(start, end, grid, heuristic, 1.5);
 		Node[] path = pathFinder.run();
 		System.out.println(pathFinder.calculateCost());
 		

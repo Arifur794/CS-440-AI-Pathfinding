@@ -12,6 +12,11 @@ public class AStar extends SearchAlgo {
 		this.h = h;
 	}
 	
+	/*@Override
+	public float gcostFunc(Node parent, Node child) {
+		return grid.costTo(parent, child) * h.getH(child);
+	}*/
+	
 	@Override
 	public float hcostFunc(Node n) {
 		return h.getH(n);
