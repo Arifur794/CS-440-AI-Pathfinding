@@ -16,6 +16,7 @@ public class GridOptionsController {
 
 	@FXML
 	private Button importMap, exportMap, findPath, findPath2, findPath3, changeStart, changeEnd;
+	@FXML
 	private TextField row, column;
 	private GridController gridCtrl;
 	private FileChooser fileChoose = new FileChooser();
@@ -23,6 +24,7 @@ public class GridOptionsController {
 	
 	@FXML
 	public void initialize() {
+		
 		importMap.setOnMouseClicked(e -> {
 			fileChoose.setInitialDirectory(new File("./"));
 			File file = fileChoose.showOpenDialog(stage);
@@ -48,8 +50,7 @@ public class GridOptionsController {
 		changeStart.setOnMouseClicked(e -> {
 			try {
 				int[] newStart = {0, 0};
-				String s = row.getText();
-				newStart[0] = Integer.parseInt(s);
+				newStart[0] = Integer.parseInt(row.getText());
 				newStart[1] = Integer.parseInt(column.getText());
 				Grid grid = gridCtrl.getGrid();
 				boolean changed = grid.changeStart(newStart);
@@ -58,13 +59,41 @@ public class GridOptionsController {
 				} else {
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Error");
-					alert.setContentText("You gave invalid coordinates for the new start");
+					alert.setHeaderText("Invalid numbers");
+					alert.setContentText("You gave invalid coordinates for the new start. It is either out of bounds or blocked");
 					alert.showAndWait();
 				}
 			} catch(Exception ex) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Error");
-				alert.setContentText("You gave invalid coordinates for the new start");
+				alert.setHeaderText("Not numbers");
+				alert.setContentText("You did not give numbers for the new start");
+				alert.showAndWait();
+			}
+			
+		});
+		
+		changeEnd.setOnMouseClicked(e -> {
+			try {
+				int[] endStart = {0, 0};
+				endStart[0] = Integer.parseInt(row.getText());
+				endStart[1] = Integer.parseInt(column.getText());
+				Grid grid = gridCtrl.getGrid();
+				boolean changed = grid.changeEnd(endStart);
+				if (changed) {
+					gridCtrl.colorGrid();
+				} else {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Error");
+					alert.setHeaderText("Invalid numbers");
+					alert.setContentText("You gave invalid coordinates for the new end. It is either out of bounds or blocked");
+					alert.showAndWait();
+				}
+			} catch(Exception ex) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Error");
+				alert.setHeaderText("Not numbers");
+				alert.setContentText("You did not give numbers for the new end");
 				alert.showAndWait();
 			}
 			
