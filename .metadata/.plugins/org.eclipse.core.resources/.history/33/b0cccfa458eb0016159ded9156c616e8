@@ -1,7 +1,0 @@
-package heuristics;
-
-public class DistanceHeuristic {
-	private int bx, by, sx, sy;
-	
-	
-}

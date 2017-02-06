@@ -81,79 +81,375 @@ The formula for the heuristic is $\frac{0.25 * \sqrt{(currNode.x - end.x)^2 + (c
 Other attempted heuristics included just the Euclidean distance which was not admissable. We also tried using numbers like 0.50 or 0.75 instead of 0.25 when modifying the Euclidean  Distance but those failed. Our first attempt was to use just the Euclidean distance from the currNode to the goal which also failed to be admissable.
 
 \section{benchmarks}
+The Nodes found by each search is above the cost of the path it found.
 \subsection{Map 1}
 \subsubsection{start and goal a}
-UCS: 15663 nodes were looked at before goal was found\\
+15663 nodes were looked at before goal was found\\
 The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
+15591 nodes were looked at before goal was found\\
 The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
+15649 nodes were looked at before goal was found\\
 The cost of found Weighted A* path with weight of 2.0 is: 196.42148
 \subsubsection{start and goal b}
-UCS: 15663 nodes were looked at before goal was found\\
-The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
-The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
-The cost of found Weighted A* path with weight of 2.0 is: 196.42148
+15710 nodes were looked at before goal was found\\
+The cost of found UCS path is: 195.51031\\
+15714 nodes were looked at before goal was found\\
+The cost of found A* path is: 196.68619\\
+15712 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 195.91412\\
 \subsubsection{start and goal c}
-UCS: 15663 nodes were looked at before goal was found\\
-The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
-The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
-The cost of found Weighted A* path with weight of 2.0 is: 196.42148
+15618 nodes were looked at before goal was found\\
+The cost of found UCS path is: 181.55751\\
+15660 nodes were looked at before goal was found\\
+The cost of found A* path is: 189.40065\\
+15654 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 184.6151\\
 \subsubsection{start and goal d}
-UCS: 15663 nodes were looked at before goal was found\\
-The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
-The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
-The cost of found Weighted A* path with weight of 2.0 is: 196.42148
+15666 nodes were looked at before goal was found\\
+The cost of found UCS path is: 198.35652\\
+15580 nodes were looked at before goal was found\\
+The cost of found A* path is: 196.72476\\
+15625 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 197.61816\\
 \subsubsection{start and goal e}
-UCS: 15663 nodes were looked at before goal was found\\
-The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
-The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
-The cost of found Weighted A* path with weight of 2.0 is: 196.42148
+7926 nodes were looked at before goal was found\\
+The cost of found UCS path is: 112.21073\\
+2380 nodes were looked at before goal was found\\
+The cost of found A* path is: 130.01709\\
+341 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 137.83081\\
 \subsubsection{start and goal f}
-UCS: 15663 nodes were looked at before goal was found\\
-The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
-The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
-The cost of found Weighted A* path with weight of 2.0 is: 196.42148
+13740 nodes were looked at before goal was found\\
+The cost of found UCS path is: 172.30873\\
+9419 nodes were looked at before goal was found\\
+The cost of found A* path is: 532.98535\\
+9419 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 532.98535\\
 \subsubsection{start and goal g}
-UCS: 15663 nodes were looked at before goal was found\\
-The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
-The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
-The cost of found Weighted A* path with weight of 2.0 is: 196.42148
+15261 nodes were looked at before goal was found\\
+The cost of found UCS path is: 185.96866\\
+14823 nodes were looked at before goal was found\\
+The cost of found A* path is: 186.87982\\
+14607 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 179.0085\\
 \subsubsection{start and goal h}
-UCS: 15663 nodes were looked at before goal was found\\
-The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
-The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
-The cost of found Weighted A* path with weight of 2.0 is: 196.42148
+14772 nodes were looked at before goal was found\\
+The cost of found UCS path is: 168.033\\
+14371 nodes were looked at before goal was found\\
+The cost of found A* path is: 168.45457\\
+14369 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 168.43312\\
 \subsubsection{start and goal i}
-UCS: 15663 nodes were looked at before goal was found\\
-The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
-The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
-The cost of found Weighted A* path with weight of 2.0 is: 196.42148
+15719 nodes were looked at before goal was found\\
+The cost of found UCS path is: 223.68861\\
+15719 nodes were looked at before goal was found\\
+The cost of found A* path is: 223.88162\\
+15720 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 226.38469\\
 \subsubsection{start and goal j}
-UCS: 15663 nodes were looked at before goal was found\\
-The cost of found UCS path is: 191.99991\\
-A*: 15591 nodes were looked at before goal was found\\
-The cost of found A* path is: 198.37859\\
-Weighted A*:15649 nodes were looked at before goal was found\\
-The cost of found Weighted A* path with weight of 2.0 is: 196.42148
+14957 nodes were looked at before goal was found\\
+The cost of found UCS path is: 160.32957\\
+15151 nodes were looked at before goal was found\\
+The cost of found A* path is: 169.53668\\
+14863 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 164.70825\\
+
+\subsection{map2}
+\subsubsection{start and goal a}
+15724 nodes were looked at before goal was found\\
+The cost of found UCS path is: 210.2107\\
+15689 nodes were looked at before goal was found\\
+The cost of found A* path is: 212.22784\\
+15676 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 210.8749\\
+\subsubsection{start and goal b}
+14239 nodes were looked at before goal was found\\
+The cost of found UCS path is: 185.32346\\
+14100 nodes were looked at before goal was found\\
+The cost of found A* path is: 188.05139\\
+13572 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 183.6666\\
+\subsubsection{start and goal c}
+7739 nodes were looked at before goal was found\\
+The cost of found UCS path is: 105.460724\\
+7748 nodes were looked at before goal was found\\
+The cost of found A* path is: 116.12862\\
+6441 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 105.510345\\
+\subsubsection{start and goal d}
+15744 nodes were looked at before goal was found\\
+The cost of found UCS path is: 222.77809\\
+15743 nodes were looked at before goal was found\\
+The cost of found A* path is: 224.51706\\
+15745 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 221.7309\\
+\subsubsection{start and goal e}
+7997 nodes were looked at before goal was found\\
+The cost of found UCS path is: 123.696014\\
+6257 nodes were looked at before goal was found\\
+The cost of found A* path is: 117.19969\\
+5352 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 121.617584\\
+\subsubsection{start and goal f}
+15743 nodes were looked at before goal was found\\
+The cost of found UCS path is: 214.64574\\
+15732 nodes were looked at before goal was found\\
+The cost of found A* path is: 218.1347\\
+15744 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 221.05258\\
+\subsubsection{start and goal g}
+12958 nodes were looked at before goal was found\\
+The cost of found UCS path is: 151.1096\\
+10496 nodes were looked at before goal was found\\
+The cost of found A* path is: 140.55109\\
+10988 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 152.62677\\
+\subsubsection{start and goal h}
+14772 nodes were looked at before goal was found\\
+The cost of found UCS path is: 168.033\\
+14371 nodes were looked at before goal was found\\
+The cost of found A* path is: 168.45457\\
+14369 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 168.43312\\
+\subsubsection{start and goal i}
+7881 nodes were looked at before goal was found\\
+The cost of found UCS path is: 96.0073\\
+15029 nodes were looked at before goal was found\\
+The cost of found A* path is: 214.82095\\
+15029 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 214.82095\\
+\subsubsection{start and goal j}
+7599 nodes were looked at before goal was found\\
+The cost of found UCS path is: 102.753624\\
+14788 nodes were looked at before goal was found\\
+The cost of found A* path is: 252.00476\\
+14788 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 252.00476\\
+
+\subsection{map3}
+\subsubsection{start and goal a}
+9561 nodes were looked at before goal was found\\
+The cost of found UCS path is: 141.63106\\
+9140 nodes were looked at before goal was found\\
+The cost of found A* path is: 144.08081\\
+8102 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 138.93866\\
+\subsubsection{start and goal b}
+15271 nodes were looked at before goal was found\\
+The cost of found UCS path is: 201.55016\\
+15240 nodes were looked at before goal was found\\
+The cost of found A* path is: 206.22784\\
+15021 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 202.5857\\
+\subsubsection{start and goal c}
+9105 nodes were looked at before goal was found\\
+The cost of found UCS path is: 132.86023\\
+5425 nodes were looked at before goal was found\\
+The cost of found A* path is: 133.17395\\
+3791 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 133.76709\\
+\subsubsection{start and goal d}
+12768 nodes were looked at before goal was found\\
+The cost of found UCS path is: 144.69601\\
+3409 nodes were looked at before goal was found\\
+The cost of found A* path is: 367.2229\\
+3409 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 367.2229\\
+\subsubsection{start and goal e}
+7981 nodes were looked at before goal was found\\
+The cost of found UCS path is: 130.26709\\
+5276 nodes were looked at before goal was found\\
+The cost of found A* path is: 106.38965\\
+3408 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 108.63229\\
+\subsubsection{start and goal f}
+8198 nodes were looked at before goal was found\\
+The cost of found UCS path is: 128.39577\\
+8707 nodes were looked at before goal was found\\
+The cost of found A* path is: 338.9581\\
+8707 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 338.9581\\
+\subsubsection{start and goal g}
+8851 nodes were looked at before goal was found\\
+The cost of found UCS path is: 135.86758\\
+6890 nodes were looked at before goal was found\\
+The cost of found A* path is: 140.59552\\
+5007 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 140.00974\\
+\subsubsection{start and goal h}
+13417 nodes were looked at before goal was found\\
+The cost of found UCS path is: 156.40189\\
+13044 nodes were looked at before goal was found\\
+The cost of found A* path is: 148.94478\\
+12997 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 149.19478\\
+\subsubsection{start and goal i}
+9365 nodes were looked at before goal was found\\
+The cost of found UCS path is: 143.51709\\
+8406 nodes were looked at before goal was found\\
+The cost of found A* path is: 142.85287\\
+7503 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 139.53915\\
+\subsubsection{start and goal j}
+14330 nodes were looked at before goal was found\\
+The cost of found UCS path is: 175.17577\\
+13419 nodes were looked at before goal was found\\
+The cost of found A* path is: 165.7156\\
+13114 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 161.84428\\
+
+\subsection{map4}
+\subsubsection{start and goal a}
+11864 nodes were looked at before goal was found\\
+The cost of found UCS path is: 149.31673\\
+12066 nodes were looked at before goal was found\\
+The cost of found A* path is: 153.29466\\
+12046 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 151.34859\\
+\subsubsection{start and goal b}
+15743 nodes were looked at before goal was found\\
+The cost of found UCS path is: 222.34915\\
+15740 nodes were looked at before goal was found\\
+The cost of found A* path is: 220.50664\\
+15738 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 218.69228\\
+\subsubsection{start and goal c}
+15743 nodes were looked at before goal was found\\
+The cost of found UCS path is: 218.6347\\
+15743 nodes were looked at before goal was found\\
+The cost of found A* path is: 215.32098\\
+15743 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 219.14941\\
+\subsubsection{start and goal d}
+The cost of found UCS path is: 142.43436\\
+9864 nodes were looked at before goal was found\\
+The cost of found A* path is: 137.52444\\
+10460 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 140.25974\\
+\subsubsection{start and goal e}
+7135 nodes were looked at before goal was found\\
+The cost of found UCS path is: 120.710724\\
+11608 nodes were looked at before goal was found\\
+The cost of found A* path is: 1202.1127\\
+11608 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 1202.1127\\
+\subsubsection{start and goal f}
+15721 nodes were looked at before goal was found\\
+The cost of found UCS path is: 198.14941\\
+15698 nodes were looked at before goal was found\\
+The cost of found A* path is: 195.82834\\
+15685 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 197.14941\\
+\subsubsection{start and goal g}
+15483 nodes were looked at before goal was found\\
+The cost of found UCS path is: 195.94595\\
+15570 nodes were looked at before goal was found\\
+The cost of found A* path is: 199.92145\\
+15524 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 197.27805\\
+\subsubsection{start and goal h}
+The cost of found UCS path is: 168.50912\\
+13614 nodes were looked at before goal was found\\
+The cost of found A* path is: 176.51953\\
+13785 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 176.36942\\
+\subsubsection{start and goal i}
+15632 nodes were looked at before goal was found\\
+The cost of found UCS path is: 215.04892\\
+15693 nodes were looked at before goal was found\\
+The cost of found A* path is: 217.85652\\
+15725 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 219.80257\\
+\subsubsection{start and goal j}
+15743 nodes were looked at before goal was found\\
+The cost of found UCS path is: 201.14941\\
+15737 nodes were looked at before goal was found\\
+The cost of found A* path is: 201.8357\\
+15731 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 200.17148\\
+
+\subsection{map5}
+\subsubsection{start and goal a}
+15184 nodes were looked at before goal was found\\
+The cost of found UCS path is: 190.5575\\
+15079 nodes were looked at before goal was found\\
+The cost of found A* path is: 186.91411\\
+15226 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 191.58566\\
+\subsubsection{start and goal b}
+15465 nodes were looked at before goal was found\\
+The cost of found UCS path is: 204.75726\\
+15348 nodes were looked at before goal was found\\
+The cost of found A* path is: 190.59673\\
+15409 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 204.02502\\
+\subsubsection{start and goal c}
+14102 nodes were looked at before goal was found\\
+The cost of found UCS path is: 158.40556\\
+14652 nodes were looked at before goal was found\\
+The cost of found A* path is: 166.64085\\
+14077 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 172.20825\\
+\subsubsection{start and goal d}
+9351 nodes were looked at before goal was found\\
+The cost of found UCS path is: 126.2671\\
+6990 nodes were looked at before goal was found\\
+The cost of found A* path is: 123.277504\\
+6103 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 129.10287\\
+\subsubsection{start and goal e}
+13973 nodes were looked at before goal was found\\
+The cost of found UCS path is: 179.25113\\
+13453 nodes were looked at before goal was found\\
+The cost of found A* path is: 171.27258\\
+13974 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 179.70825\\
+\subsubsection{start and goal f}
+15419 nodes were looked at before goal was found\\
+The cost of found UCS path is: 206.52808\\
+15551 nodes were looked at before goal was found\\
+The cost of found A* path is: 209.2499\\
+15521 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 209.85405\\
+\subsubsection{start and goal g}
+15612 nodes were looked at before goal was found\\
+The cost of found UCS path is: 203.48518\\
+15636 nodes were looked at before goal was found\\
+The cost of found A* path is: 204.3565\\
+15699 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 209.77072\\
+\subsubsection{start and goal h}
+8398 nodes were looked at before goal was found\\
+The cost of found UCS path is: 114.77812\\
+3393 nodes were looked at before goal was found\\
+The cost of found A* path is: 596.2852\\
+3393 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 596.2852\\
+\subsubsection{start and goal i}
+15662 nodes were looked at before goal was found\\
+The cost of found UCS path is: 191.00357\\
+15617 nodes were looked at before goal was found\\
+The cost of found A* path is: 188.97906\\
+15702 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 196.19356\\
+\subsubsection{start and goal j}
+7831 nodes were looked at before goal was found\\
+The cost of found UCS path is: 105.46073\\
+1937 nodes were looked at before goal was found\\
+The cost of found A* path is: 111.71073\\
+271 nodes were looked at before goal was found\\
+The cost of found Weighted A* path with weight of 2.0 is: 111.29651\\
 
 \section{Final Explanation}
+Unfortuantely as can been seen in some of the benchmarks such as Map1b our heuristic is still not optimal and will sometimes result in A* looking at more nodes than Uniform Cost Search which should not happen. We were unable to find one that was more effective.
+
+Map 2e also shows an issue since it has A* finding a better path than UCS. Again we were unable to figure out what was causing that issue or how we could fix it.
+
+another problm that can be seen on maps like 2j when the start and the goal are close to each other in either the rows or the columns is that A* and Weighted A* end up taking a very windy path while UCS goes straight ahead.
+ 
+ 2j also has a problem where even UCS decides to leave the nice path up the highway for no reason we could find. 
+
+Whether these issues are caused by the heuristic not being correct even if it seems to be admissable or if they are caused by something wrong with our search Algorithm is not something we have been able to figure out. 
 
 
 
