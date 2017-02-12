@@ -54,7 +54,39 @@ public class GridController {
 	private void addClick(Rectangle rect, int c, int r) {
 		rect.setOnMouseClicked(e -> {
 			Cell cell = grid.getCell(c, r);
-			this.cellDisplay.showInfo(cell);
+			float topCost = -1f;
+			float topLeftCost = -1f;
+			float topRightCost = -1f;
+			float leftCost = -1f;
+			float rightCost = -1f;
+			float downCost = -1f;
+			float downLeftCost = -1f;
+			float downRightCost = -1f;
+			if (r - 1  > 0) {
+				topCost = grid.costTo(cell, grid.getCell(c, r - 1));
+				if (c - 1 > 0) {
+					topLeftCost = grid.costTo(cell, grid.getCell(c - 1, r - 1));
+				}
+				if (c + 1 < 160) {
+					topRightCost = grid.costTo(cell, grid.getCell(c + 1, r - 1));
+				}
+			}
+			if (r + 1  < 120) {
+				downCost = grid.costTo(cell, grid.getCell(c, r + 1));
+				if (c - 1 > 0) {
+					downLeftCost = grid.costTo(cell, grid.getCell(c - 1, r + 1));
+				}
+				if (c + 1 < 160) {
+					downRightCost = grid.costTo(cell, grid.getCell(c + 1, r + 1));
+				}
+			}
+			if (c - 1 > 0) {
+				leftCost = grid.costTo(cell, grid.getCell(c - 1, r));
+			}
+			if (c + 1 < 160) {
+				rightCost = grid.costTo(cell, grid.getCell(c + 1, r));
+			}
+			this.cellDisplay.showInfo(cell, topLeftCost, topCost, topRightCost, leftCost, rightCost, downLeftCost, downCost, downRightCost);
     	});
 	}
 	
