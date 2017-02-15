@@ -38,7 +38,7 @@ public abstract class SearchAlgo {
 			exploreNode(n);
 			i++;
 			if(n.equals(goal)) {
-				System.out.println(i + " nodes were looked at before goal was found");
+				System.out.println(i + " nodes were looked at before goal was found\\\\");
 				return unravelPath();
 			}
 			for(Node nc : n.neighborList) {

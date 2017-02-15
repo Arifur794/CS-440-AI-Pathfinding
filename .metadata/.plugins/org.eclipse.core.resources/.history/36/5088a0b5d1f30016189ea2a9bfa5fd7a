@@ -152,7 +152,7 @@ public class GridController {
 		AStar pathFinder = new AStar(start, end, grid, heuristic);
 		Node[] path = pathFinder.run();
 		float cost = pathFinder.calculateCost();
-		System.out.println("The cost of found A* path is: " + cost);
+		System.out.println("The cost of found A* path is: " + cost + "\\\\");
 		if (cost!= -1.0f) {
 			for(Node n : path) {
 				this.displayRect[n.y][n.x].setFill(Color.GOLDENROD);
