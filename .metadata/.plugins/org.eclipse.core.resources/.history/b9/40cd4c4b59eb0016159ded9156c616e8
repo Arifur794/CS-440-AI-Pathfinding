@@ -1,8 +1,0 @@
-package searches;
-
-public class WAStar extends SearchAlgo {
-	private Heuristic func;
-	private float weight;
-	
-	public WAStar
-}

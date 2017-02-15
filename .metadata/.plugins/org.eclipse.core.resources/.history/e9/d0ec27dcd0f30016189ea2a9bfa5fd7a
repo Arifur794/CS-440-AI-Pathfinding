@@ -18,7 +18,7 @@ public abstract class SearchAlgo {
 	public SearchAlgo(Node start, Node goal, Grid grid) {
 		this.fringe = new PriorityQueue<Node>( new Comparator<Node>() {
 			public int compare(Node o1, Node o2) {
-				return Float.compare(o1.gcost + o1.hcost, o2.gcost + o2.hcost);
+				return (int) (( (o1.gcost + o1.hcost) - (o2.gcost + o2.hcost) ));
 			}
 		});
 		
@@ -51,7 +51,7 @@ public abstract class SearchAlgo {
 						addToFringe(nc, n, childCost, hcostFunc(nc));
 					} else {
 						Node nco = getNode(nc);
-						if(childCost <= nco.gcost) {
+						if(childCost < nc.gcost) {
 							addToFringe(nc, n, childCost, hcostFunc(nc));
 						}
 					}
