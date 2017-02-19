@@ -30,6 +30,7 @@ public abstract class SearchAlgo {
 	}
 	
 	public Node[] run() {
+		Runtime time = Runtime.getRuntime();
 		long startTime = System.currentTimeMillis();
 		Node n = start;
 		addToFringe(n, null, gcostFunc(start, start), hcostFunc(start));

@@ -30,6 +30,8 @@ public abstract class SearchAlgo {
 	}
 	
 	public Node[] run() {
+		Runtime time = Runtime.getRuntime();
+		long memAlreadyUsed = time.totalMemory() - time.freeMemory();
 		long startTime = System.currentTimeMillis();
 		Node n = start;
 		addToFringe(n, null, gcostFunc(start, start), hcostFunc(start));
@@ -42,6 +44,7 @@ public abstract class SearchAlgo {
 				System.out.println(i + " nodes were looked at before goal was found");
 				long totalTime = System.currentTimeMillis() - startTime;
 				System.out.println(totalTime  + " was the run time in milliseconds");
+				long memUsed = (time.totalMemory() - time.freeMemory()) - memAlreadyUsed;
 				return unravelPath();
 			}
 			for(Node nc : n.neighborList) {
