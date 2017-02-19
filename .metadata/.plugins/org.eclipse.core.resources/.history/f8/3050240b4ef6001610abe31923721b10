@@ -1,0 +1,12 @@
+package heuristics;
+
+import gui.model.Grid;
+
+public abstract class Heuristic {
+	public Heuristic(Grid g) {
+	}
+	
+	public abstract float getH(Node a) {
+		
+	}
+}

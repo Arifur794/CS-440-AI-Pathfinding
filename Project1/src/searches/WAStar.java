@@ -1,13 +1,13 @@
 package searches;
 
 import gui.model.Grid;
-import heuristics.DistanceHeuristic;
+import heuristics.Heuristic;
 
 public class WAStar extends SearchAlgo {
-	private DistanceHeuristic h;
+	private Heuristic h;
 	private float weight;
 	
-	public WAStar(Node start, Node goal, Grid grid, DistanceHeuristic h, float weight) {
+	public WAStar(Node start, Node goal, Grid grid, Heuristic h, float weight) {
 		super(start, goal, grid);
 		this.h = h;
 		this.weight = weight;

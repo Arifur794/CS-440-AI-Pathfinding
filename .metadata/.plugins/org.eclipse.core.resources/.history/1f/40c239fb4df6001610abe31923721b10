@@ -1,0 +1,10 @@
+package heuristics;
+
+public abstract class Heuristic {
+	public Heuristic() {
+	}
+	
+	public float getH() {
+		
+	}
+}

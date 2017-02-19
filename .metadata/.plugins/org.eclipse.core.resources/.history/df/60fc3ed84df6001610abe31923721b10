@@ -1,0 +1,8 @@
+package heuristics;
+
+import gui.model.Grid;
+
+public abstract class Heuristic {
+	public Heuristic() {
+	}
+}
