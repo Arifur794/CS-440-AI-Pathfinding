@@ -1,0 +1,22 @@
+package heuristics;
+
+import gui.model.Grid;
+import searches.Node;
+
+public class ManhattanDistanceHeuristic extends Heuristic {
+	private int ex, ey;
+	
+	
+	@SuppressWarnings("unused")
+	private Grid g;
+	public ManhattanDistanceHeuristic(Grid g) {
+		super(g);
+		ex = g.endCell[1];
+		ey = g.endCell[0];
+	}
+	
+	public float getH(Node a) {
+		//The Euclidean distance from currNode to goal multiplied
+		return (float) Math.sqrt( ((a.x - ex)*(a.x- ex)) + ((a.y-ey)*(a.y-ey)) );
+	}
+}

@@ -6,7 +6,7 @@ import fileHandler.GridFileManager;
 import gui.model.Cell;
 import gui.model.Grid;
 import heuristics.BadDistanceHeuristic;
-import heuristics.ManhattanDistanceHeuristic;
+import heuristics.DiagonalChebychevHeuristic;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;

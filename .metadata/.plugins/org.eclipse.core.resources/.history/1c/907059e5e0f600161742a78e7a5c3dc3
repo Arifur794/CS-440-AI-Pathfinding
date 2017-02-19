@@ -6,7 +6,7 @@ import fileHandler.GridFileManager;
 import gui.model.Cell;
 import gui.model.Grid;
 import heuristics.BadDistanceHeuristic;
-import heuristics.ManhattanDistanceHeuristic;
+import heuristics.DistanceHeuristic;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
@@ -223,9 +223,7 @@ public class GridController {
 				System.out.print(cost  + ",");*/
 				//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 				//BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
-				//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
-				//DiagonalChebychevHeuristic heuristic = new DiagonalChebychevHeuristic(grid);
-				ManhattanDistanceHeuristic heuristic = new ManhattanDistanceHeuristic(grid);
+				HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
 				AStar pathFinder1 = new AStar(start, end, grid, heuristic);
 				Node[] path = pathFinder1.run(1);
 				Float cost = pathFinder1.calculateCost();
