@@ -1,0 +1,41 @@
+
+package heuristics;
+
+import searches.Node;
+import gui.model.Grid;
+
+public class HardCellsAvoidanceHeuristic extends Heuristic {
+
+	private int[][] hardCells;
+
+	public HardCellsAvoidanceHeuristic(Grid g) {
+		super(g);
+		hardCells = g.hardCellsCenters;
+		System.out.println("Using Hard Cells Avoidance");
+	}
+
+	@Override
+	public float getH(Node a) {
+
+		float cost = Integer.MAX_VALUE;
+		for(int[] hc : hardCells) {
+			int x = hc[0];
+			int y = hc[1];
+			
+			float dcost = chebyshev(a.x, a.y, x, y);
+			if(dcost < cost) {
+				cost = dcost;
+			}
+		}
+
+		return 15/cost;
+	}
+	
+	private float chebyshev(int x1, int y1, int x2, int y2) {
+		int dx = Math.abs(x1 - x2);
+		int dy = Math.abs(y1 - y2);
+
+		return (float) (0.25 * (dx + dy) + (0.3535 - 2*0.25) * Math.min(dx, dy));
+	}
+
+}

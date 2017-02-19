@@ -28,9 +28,6 @@ public class HardCellsAvoidanceHeuristic extends Heuristic {
 		}
 
 		return 15/cost;
-
-		//return 0.25f * (float) ( Math.sqrt((a.x - bx)*(a.x - bx)
-			//	+ (a.y - by)*(a.y - by)) ) / startToGoalDist;
 	}
 	
 	private float chebyshev(int x1, int y1, int x2, int y2) {

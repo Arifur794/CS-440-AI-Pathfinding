@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class GridOptionsController {
 
 	@FXML
-	private Button importMap, exportMap, findPath, findPath2, findPath3, changeStart, changeEnd;
+	private Button importMap, exportMap, findPath, findPath2, findPath3, findPath4, changeStart, changeEnd;
 	@FXML
 	private TextField row, column, weight;
 	private GridController gridCtrl;
@@ -54,6 +54,10 @@ public class GridOptionsController {
 		//runs UCS
 		findPath2.setOnMouseClicked(e -> {
 			gridCtrl.runUCS();
+		});
+		
+		findPath4.setOnMouseClicked(e -> {
+			gridCtrl.runAll();
 		});
 		
 		//runs Weighted A  Star Search

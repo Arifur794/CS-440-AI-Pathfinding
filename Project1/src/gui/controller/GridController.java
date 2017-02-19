@@ -1,7 +1,11 @@
 package gui.controller;
 
+import java.io.File;
+
+import fileHandler.GridFileManager;
 import gui.model.Cell;
 import gui.model.Grid;
+import heuristics.BadDistanceHeuristic;
 import heuristics.DistanceHeuristic;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -148,12 +152,13 @@ public class GridController {
 	public void runAStar() {
 		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
 		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
-		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
+		//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
 		AStar pathFinder = new AStar(start, end, grid, heuristic);
 		Node[] path = pathFinder.run();
 		float cost = pathFinder.calculateCost();
-		System.out.println(cost);
-		//System.out.println("The cost of found A* path is: " + cost);
+		System.out.println("The cost of found A* path is: " + cost);
 		if (cost!= -1.0f) {
 			for(Node n : path) {
 				this.displayRect[n.y][n.x].setFill(Color.GOLDENROD);
@@ -166,12 +171,13 @@ public class GridController {
 	public void runWAStar(float w) {
 		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
 		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
-		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
+		//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
 		WAStar pathFinder = new WAStar(start, end, grid, heuristic, w);
 		Node[] path = pathFinder.run();
 		float cost = pathFinder.calculateCost();
-		System.out.println(cost);
-		//System.out.println("The cost of found Weighted A* path with weight of " + w + " is: " + cost);
+		System.out.println("The cost of found Weighted A* path with weight of " + w + " is: " + cost);
 		if (cost!= -1.0f) {
 			for(Node n : path) {
 				this.displayRect[n.y][n.x].setFill(Color.GREEN);
@@ -187,8 +193,7 @@ public class GridController {
 		UCS pathFinder = new UCS(start, end, grid);
 		Node[] path = pathFinder.run();
 		float cost = pathFinder.calculateCost();
-		System.out.println(cost);
-		//System.out.println("The cost of found UCS path is: " + cost);
+		System.out.println("The cost of found UCS path is: " + cost);
 		if (cost!= -1.0f) {
 			for(Node n : path) {
 				this.displayRect[n.y][n.x].setFill(Color.YELLOW);
@@ -197,5 +202,49 @@ public class GridController {
 			this.displayRect[end.y][end.x].setFill(Color.RED);
 		}
 		
+	}
+	
+	public void runAll() {
+		int firstValue = 1;
+		int secondValue = 97;
+		String fileName;
+		for (int i = 1; i < 51; i++) {
+			fileName = "map" + Integer.toString(firstValue) + Character.toString((char) secondValue) + ".txt";
+			System.out.print(fileName + ",");
+			File file = new File("./" + fileName);
+			if(file != null) {
+				Grid grid = GridFileManager.importFile(file.getAbsolutePath(), this.ROWS, this.COLS);
+				this.changeGrid(grid);
+				Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+				Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+				UCS pathFinder = new UCS(start, end, grid);
+				Node[] path = pathFinder.run(1);
+				float cost = pathFinder.calculateCost();
+				System.out.println(cost);
+				DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+				//BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
+				//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
+				AStar pathFinder1 = new AStar(start, end, grid, heuristic);
+				//Node[] path = pathFinder1.run(1);
+				//Float cost = pathFinder1.calculateCost();
+				path = pathFinder1.run(1);
+				cost = pathFinder1.calculateCost();
+				System.out.print(cost + ",");
+				WAStar pathFinder2 = new WAStar(start, end, grid, heuristic, 2f);
+				path = pathFinder2.run(1);
+				cost = pathFinder2.calculateCost();
+				System.out.print(cost + ",");
+				WAStar pathFinder3 = new WAStar(start, end, grid, heuristic, 3f);
+				path = pathFinder3.run(1);
+				cost = pathFinder3.calculateCost();
+				System.out.println(cost);
+				secondValue++;
+				if (i % 10 == 0) {
+					firstValue++;
+					secondValue = 97;
+				}
+			}
+			
+		}
 	}
 }

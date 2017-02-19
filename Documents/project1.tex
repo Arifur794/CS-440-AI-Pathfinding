@@ -81,9 +81,9 @@ The formula for the heuristic is $0.25 * \sqrt{(currNode.x - end.x)^2 + (currNod
 
 Other attempted heuristics were the following.
 
-1. Euclidean distance from currNode to goal. Not admissable because it is not optimistic.
+1. Euclidean distance from currNode to goal. Not admissable because it is not optimistic due to not accounting for rivers in its travel cost.
 
-2. ???
+2. A Heuristic that attempts to avoid cells which are hard to travel through. This ended up being admissable for some maps such as map1a and map1b where it did find the optimal path but it was not optimal on the majority of the maps.
 
 3. ???
 

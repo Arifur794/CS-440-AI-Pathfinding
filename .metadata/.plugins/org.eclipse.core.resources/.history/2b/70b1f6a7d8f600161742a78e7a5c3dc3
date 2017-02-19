@@ -1,0 +1,233 @@
+package gui.controller;
+
+import java.io.File;
+
+import fileHandler.GridFileManager;
+import gui.model.Cell;
+import gui.model.Grid;
+import heuristics.BadDistanceHeuristic;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import searches.AStar;
+import searches.Node;
+import searches.UCS;
+import searches.WAStar;
+
+public class GridController {
+	@FXML 
+	private GridPane gridPane;
+	private Grid grid;
+	private CellInfoDisplayController cellDisplay;
+	private Rectangle[][] displayRect;
+	
+	final double BUTTON_PADDING = 2;
+	final int ROWS = 120; 
+	final int COLS = 160;
+	final int WIDTH = 1400;
+	final int HEIGHT = 780;
+	final int CELL_SIZE = 10;
+	
+	public GridController() {
+		this.grid = new Grid(COLS, ROWS);
+		this.displayRect = new Rectangle[ROWS][COLS];
+	}
+	
+	@FXML
+	private void initialize() {
+		initGridGui(gridPane);
+	}
+	
+	public void setCellDisplayController(CellInfoDisplayController cdc) {
+		this.cellDisplay = cdc;
+	}
+	
+	public void initGridGui(GridPane gridPane) {
+		gridPane.setPadding(new Insets(BUTTON_PADDING));
+	    gridPane.setHgap(BUTTON_PADDING);
+	    gridPane.setVgap(BUTTON_PADDING);
+
+	    this.gridPane = gridPane;
+		grid.createGrid();
+		colorGrid();
+	}
+	
+	private void addClick(Rectangle rect, int c, int r) {
+		rect.setOnMouseClicked(e -> {
+			Cell cell = grid.getCell(c, r);
+			float topCost = -1f;
+			float topLeftCost = -1f;
+			float topRightCost = -1f;
+			float leftCost = -1f;
+			float rightCost = -1f;
+			float downCost = -1f;
+			float downLeftCost = -1f;
+			float downRightCost = -1f;
+			if (r - 1  > 0) {
+				topCost = grid.costTo(cell, grid.getCell(c, r - 1));
+				if (c - 1 > 0) {
+					topLeftCost = grid.costTo(cell, grid.getCell(c - 1, r - 1));
+				}
+				if (c + 1 < 160) {
+					topRightCost = grid.costTo(cell, grid.getCell(c + 1, r - 1));
+				}
+			}
+			if (r + 1  < 120) {
+				downCost = grid.costTo(cell, grid.getCell(c, r + 1));
+				if (c - 1 > 0) {
+					downLeftCost = grid.costTo(cell, grid.getCell(c - 1, r + 1));
+				}
+				if (c + 1 < 160) {
+					downRightCost = grid.costTo(cell, grid.getCell(c + 1, r + 1));
+				}
+			}
+			if (c - 1 > 0) {
+				leftCost = grid.costTo(cell, grid.getCell(c - 1, r));
+			}
+			if (c + 1 < 160) {
+				rightCost = grid.costTo(cell, grid.getCell(c + 1, r));
+			}
+			this.cellDisplay.showInfo(cell, topLeftCost, topCost, topRightCost, leftCost, rightCost, downLeftCost, downCost, downRightCost);
+    	});
+	}
+	
+	public Grid getGrid() {
+		return this.grid;
+	}
+	
+	public void colorGrid() {
+		gridPane.getChildren().clear();
+		
+		Rectangle rect;
+	    Cell cell;
+	    Color color;
+	    
+	    for (int r = 1; r <= ROWS; r++) {
+	        for (int c = 1; c <= COLS; c++) {
+
+	            	cell = grid.getCell(c, r);
+	            	switch(cell.celltype) {
+		            	case UNBLOCKED:
+		            		color = Color.WHITE;
+		            		break;
+		            	case HARD:
+		            		color = Color.GRAY;
+		            		break;
+		            	case HIGHWAY_UNBLOCKED:
+		            		color = Color.BLUE;
+		            		break;
+		            	case HIGHWAY_HARD:
+		            		color = Color.PURPLE;
+		            		break;
+		            	case BLOCKED:
+		            		color = Color.BLACK;
+		            		break;
+		            	case START_POINT_UNBLOCKED:
+		            	case START_POINT_HARD:
+		            		color = Color.ORANGE;
+		            		break;
+		            	case END_POINT_UNBLOCKED:
+		            	case END_POINT_HARD:
+		            		color = Color.RED;
+		            		break;
+		            	default:
+		            		color = Color.WHITE;
+	            	}
+	            	rect = new Rectangle(CELL_SIZE, CELL_SIZE, color);
+	            	addClick(rect, c, r);
+	            	this.displayRect[r - 1][c - 1] = rect;
+	            	gridPane.add(rect, c, r);           
+	        }
+	    }
+	}
+	
+	public void changeGrid(Grid grid) {
+		this.grid = grid;
+		colorGrid();
+	}
+	
+	public void runAStar() {
+		/*Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+		//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
+		//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
+		AStar pathFinder = new AStar(start, end, grid, heuristic);
+		Node[] path = pathFinder.run();
+		float cost = pathFinder.calculateCost();
+		System.out.println(cost);
+		//System.out.println("The cost of found A* path is: " + cost);
+		if (cost!= -1.0f) {
+			for(Node n : path) {
+				this.displayRect[n.y][n.x].setFill(Color.GOLDENROD);
+			}
+			this.displayRect[start.y][start.x].setFill(Color.ORANGE);
+			this.displayRect[end.y][end.x].setFill(Color.RED);
+		}*/
+		int firstValue = 1;
+		String secondValue = "a";
+		String fileName = "map" + Integer.toString(firstValue) + secondValue + ".txt";
+		for (int i = 0; i < 51; i++) {
+			File file = new File("./" + fileName);
+			if(file != null) {
+				Grid grid = GridFileManager.importFile(file.getAbsolutePath(), this.ROWS, this.COLS);
+				this.changeGrid(grid);
+				Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+				Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+				//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+				BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
+				//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
+				AStar pathFinder = new AStar(start, end, grid, heuristic);
+				Node[] path = pathFinder.run();
+				float cost = pathFinder.calculateCost();
+				System.out.println(cost);
+				if (i % 10 == 0) {
+					firstValue++;
+					secondValue = "a";
+				}
+				fileName = "map" + firstValue + secondValue + ".txt";
+			}
+			
+		}
+	}
+	
+	public void runWAStar(float w) {
+		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+		//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
+		//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
+		WAStar pathFinder = new WAStar(start, end, grid, heuristic, w);
+		Node[] path = pathFinder.run();
+		float cost = pathFinder.calculateCost();
+		System.out.println(cost);
+		//System.out.println("The cost of found Weighted A* path with weight of " + w + " is: " + cost);
+		if (cost!= -1.0f) {
+			for(Node n : path) {
+				this.displayRect[n.y][n.x].setFill(Color.GREEN);
+			}
+			this.displayRect[start.y][start.x].setFill(Color.ORANGE);
+			this.displayRect[end.y][end.x].setFill(Color.RED);
+		}
+	}
+
+	public void runUCS() {
+		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+		UCS pathFinder = new UCS(start, end, grid);
+		Node[] path = pathFinder.run();
+		float cost = pathFinder.calculateCost();
+		System.out.println(cost);
+		//System.out.println("The cost of found UCS path is: " + cost);
+		if (cost!= -1.0f) {
+			for(Node n : path) {
+				this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+			}
+			this.displayRect[start.y][start.x].setFill(Color.ORANGE);
+			this.displayRect[end.y][end.x].setFill(Color.RED);
+		}
+		
+	}
+}

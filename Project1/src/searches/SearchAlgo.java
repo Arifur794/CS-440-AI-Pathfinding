@@ -39,9 +39,48 @@ public abstract class SearchAlgo {
 			exploreNode(n);
 			i++;
 			if(n.equals(goal)) {
-				System.out.println(i);//+ " nodes were looked at before goal was found");
+				System.out.println(i+ " nodes were looked at before goal was found");
 				long totalTime = System.currentTimeMillis() - startTime;
-				System.out.println(totalTime);//  + " was the run time in milliseconds");
+				System.out.print(totalTime + " was the run time in milliseconds");
+				return unravelPath();
+			}
+			for(Node nc : n.neighborList) {
+				if(nc.celltype == CellType.BLOCKED) {
+					continue;
+				}
+				float childCost = n.gcost + gcostFunc(n, nc);				
+				if(!isExplored(nc)) {
+					if(!inFringe(nc)) {
+						addToFringe(nc, n, childCost, hcostFunc(nc));
+					} else {
+						Node nco = getNode(nc);
+						if(childCost <= nco.gcost) {
+							addToFringe(nc, n, childCost, hcostFunc(nc));
+						}
+					}
+					
+				}
+			}
+		}
+		System.out.println("No path to the goal was found");
+		long totalTime = System.currentTimeMillis() - startTime;
+		System.out.println(totalTime  + " was the run time in milliseconds");
+		return null;
+	}
+	
+	public Node[] run(int x) {
+		long startTime = System.currentTimeMillis();
+		Node n = start;
+		addToFringe(n, null, gcostFunc(start, start), hcostFunc(start));
+		int i = 0;
+		while(!isFringeEmpty()) {
+			n = getNextNode();
+			exploreNode(n);
+			i++;
+			if(n.equals(goal)) {
+				System.out.print(i + ",");//+ " nodes were looked at before goal was found");
+				long totalTime = System.currentTimeMillis() - startTime;
+				System.out.print(totalTime + ",");//  + " was the run time in milliseconds");
 				return unravelPath();
 			}
 			for(Node nc : n.neighborList) {
