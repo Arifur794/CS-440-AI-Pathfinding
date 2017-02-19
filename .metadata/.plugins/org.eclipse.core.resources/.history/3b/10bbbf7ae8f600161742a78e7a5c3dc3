@@ -220,21 +220,21 @@ public class GridController {
 				this.changeGrid(grid);
 				Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
 				Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
-				UCS pathFinder = new UCS(start, end, grid);
+				/*UCS pathFinder = new UCS(start, end, grid);
 				@SuppressWarnings("unused")
 				Node[] path = pathFinder.run(1);
 				float cost = pathFinder.calculateCost();
-				System.out.print(cost  + ",");
-				DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+				System.out.print(cost  + ",");*/
+				//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 				//BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
 				//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
-				//ChebyshevHeuristic heuristic = new ChebyshevHeuristic(grid);
+				ChebyshevHeuristic heuristic = new ChebyshevHeuristic(grid);
 				//ManhattanDistanceHeuristic heuristic = new ManhattanDistanceHeuristic(grid);
 				AStar pathFinder1 = new AStar(start, end, grid, heuristic);
-				//Node[] path = pathFinder1.run(1);
-				//Float cost = pathFinder1.calculateCost();
-				path = pathFinder1.run(1);
-				cost = pathFinder1.calculateCost();
+				Node[] path = pathFinder1.run(1);
+				Float cost = pathFinder1.calculateCost();
+				//path = pathFinder1.run(1);
+				//cost = pathFinder1.calculateCost();
 				System.out.print(cost + ",");
 				WAStar pathFinder2 = new WAStar(start, end, grid, heuristic, 2f);
 				path = pathFinder2.run(1);

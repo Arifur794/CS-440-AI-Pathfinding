@@ -5,7 +5,8 @@ import java.io.File;
 import fileHandler.GridFileManager;
 import gui.model.Cell;
 import gui.model.Grid;
-import heuristics.*;
+import heuristics.BadDistanceHeuristic;
+import heuristics.ManhattanDistanceHeuristic;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
@@ -151,11 +152,9 @@ public class GridController {
 	public void runAStar() {
 		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
 		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
-		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
-		//BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
+		//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
 		//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
-		//ChebyshevHeuristic heuristic = new ChebyshevHeuristic(grid);
-		//ManhattanDistanceHeuristic heuristic = new ManhattanDistanceHeuristic(grid);
 		AStar pathFinder = new AStar(start, end, grid, heuristic);
 		Node[] path = pathFinder.run();
 		float cost = pathFinder.calculateCost();
@@ -172,11 +171,9 @@ public class GridController {
 	public void runWAStar(float w) {
 		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
 		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
-		DistanceHeuristic heuristic = new DistanceHeuristic(grid);
-		//BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
+		//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+		BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
 		//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
-		//ChebyshevHeuristic heuristic = new ChebyshevHeuristic(grid);
-		//ManhattanDistanceHeuristic heuristic = new ManhattanDistanceHeuristic(grid);
 		WAStar pathFinder = new WAStar(start, end, grid, heuristic, w);
 		Node[] path = pathFinder.run();
 		float cost = pathFinder.calculateCost();
@@ -221,14 +218,13 @@ public class GridController {
 				Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
 				Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
 				UCS pathFinder = new UCS(start, end, grid);
-				@SuppressWarnings("unused")
 				Node[] path = pathFinder.run(1);
 				float cost = pathFinder.calculateCost();
 				System.out.print(cost  + ",");
 				DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 				//BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
 				//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
-				//ChebyshevHeuristic heuristic = new ChebyshevHeuristic(grid);
+				//DiagonalChebychevHeuristic heuristic = new DiagonalChebychevHeuristic(grid);
 				//ManhattanDistanceHeuristic heuristic = new ManhattanDistanceHeuristic(grid);
 				AStar pathFinder1 = new AStar(start, end, grid, heuristic);
 				//Node[] path = pathFinder1.run(1);

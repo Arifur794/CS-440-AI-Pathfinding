@@ -225,10 +225,10 @@ public class GridController {
 				Node[] path = pathFinder.run(1);
 				float cost = pathFinder.calculateCost();
 				System.out.print(cost  + ",");
-				DistanceHeuristic heuristic = new DistanceHeuristic(grid);
+				//DistanceHeuristic heuristic = new DistanceHeuristic(grid);
 				//BadDistanceHeuristic heuristic = new BadDistanceHeuristic(grid);
 				//HardCellsAvoidanceHeuristic heuristic = new HardCellsAvoidanceHeuristic(grid);
-				//ChebyshevHeuristic heuristic = new ChebyshevHeuristic(grid);
+				ChebyshevHeuristic heuristic = new ChebyshevHeuristic(grid);
 				//ManhattanDistanceHeuristic heuristic = new ManhattanDistanceHeuristic(grid);
 				AStar pathFinder1 = new AStar(start, end, grid, heuristic);
 				//Node[] path = pathFinder1.run(1);

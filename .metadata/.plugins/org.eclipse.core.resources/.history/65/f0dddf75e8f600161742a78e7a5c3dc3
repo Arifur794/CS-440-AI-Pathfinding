@@ -16,6 +16,6 @@ public class ManhattanDistanceHeuristic extends Heuristic {
 	}
 	
 	public float getH(Node a) {
-		return (float) 0.25 * (Math.abs(a.x-ex) + Math.abs(a.y-ey));
+		return (float) Math.abs(a.x-ex) + Math.abs(a.y-ey);
 	}
 }
