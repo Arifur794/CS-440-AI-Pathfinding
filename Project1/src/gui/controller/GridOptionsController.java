@@ -27,8 +27,8 @@ public class GridOptionsController {
 	private GridController gridCtrl;
 	private FileChooser fileChoose = new FileChooser();
 	private Stage stage;
+	private String heuristic;
 	private String[] heuristics = {"Distance", "BadDistance", "Chebyshev", "Manhattan", "HardCellsAvoidance"};
-	private Heuristic heuristic;
 	
 	@FXML
 	public void initialize() {
@@ -105,13 +105,7 @@ public class GridOptionsController {
 			try {
 				float w1 = Float.parseFloat(weight1.getText());
 				float w2 = Float.parseFloat(weight2.getText());
-				Heuristic[] hArray = new Heuristic[5];
-				hArray[0] = new DistanceHeuristic(gridCtrl.getGrid());
-				hArray[1] = new BadDistanceHeuristic(gridCtrl.getGrid());
-				hArray[2] = new ChebyshevHeuristic(gridCtrl.getGrid());
-				hArray[3] = new ManhattanDistanceHeuristic(gridCtrl.getGrid());
-				hArray[4] = new HardCellsAvoidanceHeuristic(gridCtrl.getGrid());
-				gridCtrl.runSAStar(hArray, w1, w2);
+				gridCtrl.runSAStar(w1, w2);
 			} catch(Exception ex) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Error");
@@ -131,13 +125,7 @@ public class GridOptionsController {
 		});
 		
 		findPath7.setOnMouseClicked(e -> {
-			Heuristic[] hArray = new Heuristic[5];
-			hArray[0] = new DistanceHeuristic(gridCtrl.getGrid());
-			hArray[1] = new BadDistanceHeuristic(gridCtrl.getGrid());
-			hArray[2] = new ChebyshevHeuristic(gridCtrl.getGrid());
-			hArray[3] = new ManhattanDistanceHeuristic(gridCtrl.getGrid());
-			hArray[4] = new HardCellsAvoidanceHeuristic(gridCtrl.getGrid());
-			gridCtrl.runAllSAStar(hArray);
+			gridCtrl.runAllSAStar();
 		});
 		
 		findPath8.setOnMouseClicked(e -> {
@@ -205,27 +193,8 @@ public class GridOptionsController {
 		});
 		
 		chosenHeuristic.setOnAction( e -> {
-			String thisH = chosenHeuristic.getSelectionModel().getSelectedItem();
-			if(thisH.equals(heuristics[0])) {
-				heuristic = new DistanceHeuristic(gridCtrl.getGrid());
-				System.out.println("Using modified Euclidean Distance");
-			}
-			if(thisH.equals(heuristics[1])) {
-				heuristic = new BadDistanceHeuristic(gridCtrl.getGrid());
-				System.out.println("Using unmodified Euclidean Distance");
-			}
-			if(thisH.equals(heuristics[2])) {
-				heuristic = new ChebyshevHeuristic(gridCtrl.getGrid());
-				System.out.println("Using Chebyshev Distance");
-			}
-			if(thisH.equals(heuristics[3])) {
-				heuristic = new ManhattanDistanceHeuristic(gridCtrl.getGrid());
-				System.out.println("using Manhattan Distance");
-			}
-			if(thisH.equals(heuristics[4])) {
-				heuristic = new HardCellsAvoidanceHeuristic(gridCtrl.getGrid());
-				System.out.println("using Avoid Hard Cells");
-			}
+			heuristic = chosenHeuristic.getSelectionModel().getSelectedItem();
+			
 		});
 	}
 	

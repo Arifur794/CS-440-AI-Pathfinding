@@ -2,24 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="getTypeInt" key="selection"/>
+		<item value="grid" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="getTypeInt"/>
-			<item value="costTo"/>
-			<item value="allNodes"/>
-			<item value="addToFringe"/>
-			<item value="getRandomBoundary"/>
-			<item value="hCostFunc"/>
-			<item value="view"/>
-			<item value="calculateCost"/>
+			<item value="gridCtrl.getGrid()"/>
+			<item value="thisH"/>
+			<item value="insertNode"/>
+			<item value="nArr"/>
+			<item value="Arr"/>
+			<item value="ncArr"/>
+			<item value="arr"/>
+			<item value="nodeMap"/>
 		</list>
 		<list key="replacehistory">
+			<item value="grid"/>
+			<item value="heuristic"/>
+			<item value="nArray"/>
+			<item value="ncArray"/>
+			<item value="Array"/>
+			<item value="mapOfNodes"/>
+			<item value="hArray"/>
 			<item value="End"/>
-			<item value="end"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
