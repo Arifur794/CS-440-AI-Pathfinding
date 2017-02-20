@@ -11,10 +11,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import searches.AStar;
-import searches.Node;
-import searches.UCS;
-import searches.WAStar;
+import searches.*;
 
 public class GridController {
 	@FXML 
@@ -196,6 +193,54 @@ public class GridController {
 		}
 		
 	}
+	
+	public void runSAStar(Heuristic[] hArray, float w1, float w2) {
+		Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+		Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+		SAStar pathFinder = new SAStar(start, end, grid, hArray, w1, w2);
+		Node[] path = pathFinder.run();
+		float cost = pathFinder.calculateCost();
+		System.out.println("The cost of found Sequential A* path is: " + cost);
+		if (cost!= -1.0f) {
+			for(Node n : path) {
+				this.displayRect[n.y][n.x].setFill(Color.YELLOW);
+			}
+			this.displayRect[start.y][start.x].setFill(Color.ORANGE);
+			this.displayRect[end.y][end.x].setFill(Color.RED);
+		}
+	}
+	
+	public void runAllSAStar(Heuristic[] hArray) {
+		int firstValue = 1;
+		int secondValue = 97;
+		String fileName;
+		for (int i = 1; i < 51; i++) {
+			fileName = "map" + Integer.toString(firstValue) + Character.toString((char) secondValue) + ".txt";
+			System.out.print(fileName + ",");
+			File file = new File("./" + fileName);
+			if(file != null) {
+				Grid grid = GridFileManager.importFile(file.getAbsolutePath(), this.ROWS, this.COLS);
+				this.changeGrid(grid);
+				Node start = new Node(grid.getCell(grid.startCell[1] + 1, grid.startCell[0] + 1));
+				Node end = new Node(grid.getCell(grid.endCell[1] + 1, grid.endCell[0] + 1));
+				SAStar pathFinder = new SAStar(start, end, grid, hArray, 1.25f, 1.25f);
+				@SuppressWarnings("unused")
+				Node[] path = pathFinder.run(1);
+				float cost = pathFinder.calculateCost();
+				System.out.print(cost + ",");
+				SAStar pathFinder2 = new SAStar(start, end, grid, hArray, 2f, 2f);
+				path = pathFinder2.run(1);
+				cost = pathFinder2.calculateCost();
+				System.out.println(cost);
+				secondValue++;
+				if (i % 10 == 0) {
+					firstValue++;
+					secondValue = 97;
+				}
+			}
+		}
+	}
+	
 	
 	public void runAll(Heuristic h) {
 		int firstValue = 1;

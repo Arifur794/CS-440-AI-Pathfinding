@@ -1,0 +1,297 @@
+package searches;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+
+import gui.model.Grid;
+import gui.model.Cell.CellType;
+import heuristics.Heuristic;
+
+/*
+ * This class implements the Integrated A* Algorithm
+ */
+public class IAStar {
+
+	private Node start, goal;
+	private Node[] path;
+	private Heuristic[] harr;
+	private int hlen;
+	private float w1, w2;
+	private Grid grid;
+	/*
+	 * allNodes maps nodes explored of an admissible heuristic to
+	 * same nodes of other heuristics
+	 */
+	private HashMap<Node, Node[]> nodeMap;
+	/*
+	 * allFringes are the list of queues ordered in the same way as the
+	 * input heuristics (each queue corresponds to a heuristic in harr)
+	 */
+	private ArrayList<PriorityQueue<Node>> allFringes;
+
+
+	/*
+	 *
+	 * Contains the Anchor and Inadmissible Closed Lists
+	 *
+	 */
+	private ArrayList<PriorityQueue<Node>> closedLists;
+
+
+	/*
+	 * harr is an array of all heuristics to be used in algorithm
+	 * NOTE: The first heuristic must be an admissible heuristic.
+	 * The other heuristics maybe inadmissible.
+	 */
+	public IAStar(Node start, Node goal,
+			Grid grid, Heuristic[] harr, float w1, float w2) {
+		this.start = start; this.goal = goal;
+		this.grid = grid;
+		this.harr = harr;
+		this.hlen = harr.length;
+		this.w1 = w1;
+		this.w2 = w2;
+		this.nodeMap = new HashMap<Node, Node[]>();
+		this.allFringes = new ArrayList<PriorityQueue<Node>>(hlen);
+		this.closedLists = new ArrayList<PriorityQueue<Node>>(2);
+	}
+
+	public Node[] run() {
+
+		for(int i = 0; i < hlen; i++) {
+			allFringes.add(new PriorityQueue<Node>( new Comparator<Node>() {
+				public int compare(Node o1, Node o2) {
+					return Float.compare(o1.gcost + o1.hcost, o2.gcost + o2.hcost);
+				}
+			}));
+
+			addToFringe(start, null, 0, hcostFunc(start, i), i);
+			addToFringe(goal, null, Integer.MAX_VALUE, 0, i);
+		}
+
+		closedLists.add(new PriorityQueue<Node>(new Comparator<Node>(){
+			public int compare(Node o1, Node o2){
+				return Float.compare(o1.gcost+o1.hcost,  o2.gcost+o1.hcost);
+			}
+		}));
+		closedLists.add(new PriorityQueue<Node>(new Comparator<Node>(){
+			public int compare(Node o1, Node o2){
+				return Float.compare(o1.gcost+o1.hcost,  o2.gcost+o1.hcost);
+			}
+		}));
+
+		PriorityQueue<Node> admissibleFringe = allFringes.get(0);
+		float admissibleCost, otherCost;
+		while((admissibleCost = getCost(admissibleFringe.peek())) < Integer.MAX_VALUE) { // while min cost is less than inf
+
+			for(int i = 1; i < hlen; i++) {
+				PriorityQueue<Node> otherFringe = allFringes.get(i);
+				if(otherFringe!=null){
+					otherCost = getCost(otherFringe.peek());
+
+					if(otherCost <= w2*admissibleCost) {
+
+						float goalCost = nodeMap.get(goal)[i].gcost;
+						if(goalCost <= otherCost) {
+							if(goalCost < Integer.MAX_VALUE) {
+								System.out.println("DONE");
+								return unravelPath(i);
+							}
+						} else {
+							exploreNode(otherFringe.poll(), i);
+							addToClosed(otherFringe.poll(), 1);
+						}
+
+					} else {
+
+						float addmissibleGoalCost = nodeMap.get(goal)[0].gcost;
+						if(addmissibleGoalCost <= admissibleCost) {
+							if(addmissibleGoalCost < Integer.MAX_VALUE) {
+								System.out.println("DONE");
+								return unravelPath(i);
+							}
+						} else {
+							exploreNode(admissibleFringe.poll(), 0);
+							addToClosed(admissibleFringe.poll(), 0);
+						}
+
+					}
+				}
+			}
+
+		}
+
+		return null;
+	}
+
+	private void exploreNode(Node n, int searchNum) {
+		//System.out.println("Searching for " + searchNum);
+		n.setNeighbors(grid.getNeighbors(n.x, n.y));
+		n.isExplored = true;
+		//Removes node from all Open Lists (optimal)
+		for(int k=0; k<5; k++){
+			removeFromFringe(n, k);
+		}
+		for(Node nc : n.neighbors) {
+			if(nc.celltype == CellType.BLOCKED) {
+				continue;
+			}
+
+			if(nodeMap.get(nc) == null) {
+				// node does not exist in map
+				createEntry(nc);
+			}
+
+			nc = nodeMap.get(nc)[searchNum];
+			//System.out.println(nc);
+			float childCost = n.gcost + gcostFunc(n, nc);
+			if(nc.gcost > childCost){
+				nc.gcost = childCost;
+
+				//Check if node not expanded in Anchor Search
+				if(!nc.inAncList) {
+					//Inserted into Open List0
+					addToFringe(nc, n, childCost, hcostFunc(nc, 0), 0);
+					//Check if node not expanded in Inadmissible Searches
+					if(!nc.inInadList){
+						for(int j=1; j<5; j++){
+							//OPTIMIZATION
+							if(hcostFunc(nc, j)<=w2*hcostFunc(nc, 0)){
+								//Inserted into all other Open Lists
+								addToFringe(nc, n, childCost, hcostFunc(nc, j), j);
+							}
+						}
+					}
+				}
+
+			}
+			/*if(searchNum == 0) {
+				String printStr = "NODEMAP:";
+				for(Node nprint : nodeMap.keySet()) {
+					printStr += "\n\t" + nprint + " : " + Arrays.toString(nodeMap.get(nprint));
+				}
+				System.out.println(printStr);
+			}*/
+
+		}
+	}
+
+	public Node[] unravelPath(int seqNum) {
+		ArrayList<Node> pathList = new ArrayList<Node>();
+		//pathList.add(goal);
+		Node n = nodeMap.get(goal)[seqNum], p;
+
+		while(n != null) {
+			p = n.getParent();
+			pathList.add(n);
+			n = p;
+		}
+		path = new Node[pathList.size()];
+		path = pathList.toArray(path);
+		return path;
+	}
+
+	// ---------- START FRINGE FUNCTIONS ---------------------------------------------------
+	private void addToFringe(Node n, Node p, float gCost, float hCost, int fringeNum) {
+		PriorityQueue<Node> fringe = allFringes.get(fringeNum);
+		if(inFringe(n, fringeNum)) {
+			removeFromFringe(n, fringeNum);
+		}
+		n.gcost = gCost; n.hcost = hCost;
+		n.inFringe = true; n.setParent(p);
+		fringe.add(n);
+		insertNode(n, fringeNum);
+	}
+
+	private boolean inFringe(Node n, int fringeNum) {
+		Node[] simNodes = nodeMap.get(n);
+		return (simNodes != null && simNodes[fringeNum] != null) ? simNodes[fringeNum].inFringe : false;
+	}
+
+	private void removeFromFringe(Node n, int fringeNum) {
+		allFringes.get(fringeNum).remove(n);
+	}
+
+/*
+ *
+ * VVV  Choosing which of the two closed lists (Anchor or Inadmissible) we are adding to VVV
+ */
+
+
+	private void addToClosed(Node n, int listNum) {
+		PriorityQueue<Node> closedList = closedLists.get(listNum);
+
+		if(listNum==0){
+			n.inAncList = true;
+		}
+		else{
+			n.inInadList=true;
+		}
+			closedList.add(n);
+	}
+
+
+
+
+	// ---------- END FRINGE FUNCTIONS ---------------------------------------------------
+
+	// ---------- START COST FUNCTIONS ---------------------------------------------------
+
+	public float gcostFunc(Node parent, Node child) {
+		return grid.costTo(parent, child);
+	}
+
+	public float hcostFunc(Node n, int heuristicNum) {
+		return w1*harr[heuristicNum].getH(n);
+	}
+
+	public float getCost(Node n) {
+		return n.gcost + w1*n.hcost;
+	}
+
+	// ---------- END COST FUNCTIONS -----------------------------------------------------
+
+	// ---------- START NODE EXPLORATION FUNCTIONS ---------------------------------------
+
+	private void insertNode(Node n, int arrIndex) {
+		Node[] ncArr = nodeMap.get(n);
+		if(ncArr == null) { // if null entry, add a new node entry
+			createEntry(n);
+			ncArr = nodeMap.get(n);
+		}
+
+		ncArr[arrIndex] = n;
+
+	}
+
+	private void createEntry(Node n) {
+		Node[] nArr = new Node[hlen];
+		for(int i = 0; i < hlen; i++){
+			Node nc = new Node(n);
+			nc.gcost = Integer.MAX_VALUE;
+			nc.hcost = 0;
+			nArr[i] = nc;
+		}
+		nodeMap.put(n, nArr);
+	}
+
+	// ---------- END NODE EXPLORATION FUNCTIONS ---------------------------------------
+
+	public float calculateCost() {
+		if(path == null) {
+			throw new NullPointerException("The path is null. The algorithm may not have run.");
+		}
+
+		float cost = 0;
+		Node p = path[0];
+		for(Node n : path) {
+			cost += grid.costTo(n, p);
+			p = n;
+		}
+
+		return cost;
+	}
+}

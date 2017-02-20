@@ -17,9 +17,10 @@ import javafx.stage.Stage;
 public class GridOptionsController {
 
 	@FXML
-	private Button importMap, exportMap, findPath, findPath2, findPath3, findPath4, changeStart, changeEnd;
+	private Button importMap, exportMap, changeStart, changeEnd, 
+	findPath, findPath2, findPath3, findPath4, findPath5, findPath6, findPath7, findPath8;
 	@FXML
-	private TextField row, column, weight;
+	private TextField row, column, weight, weight1, weight2;
 	@FXML
 	private ComboBox<String> chosenHeuristic;
 	
@@ -53,7 +54,7 @@ public class GridOptionsController {
 			}
 		});
 		
-		//runs AStar search
+		//runs A* search
 		findPath.setOnMouseClicked(e -> {
 			try {
 				gridCtrl.runAStar(heuristic);
@@ -69,12 +70,28 @@ public class GridOptionsController {
 		//runs UCS
 		findPath2.setOnMouseClicked(e -> {
 			gridCtrl.runUCS();
+			
 		});
 		
+		//runs weighted A* search
+				findPath3.setOnMouseClicked(e -> {
+					try {
+						float w = Float.parseFloat(weight.getText());
+						gridCtrl.runWAStar(w, heuristic);
+					} catch(Exception ex) {
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Error");
+						alert.setHeaderText("No weight or heuristic");
+						alert.setContentText("You did not give the weight or select the heuristic to be used");
+						alert.showAndWait();
+					}
+				});
+		
+		//runs UCS, A*, and Weighted A* with weights of 2 and 3 on all given maps
 		findPath4.setOnMouseClicked(e -> {
-			try {
+			if (heuristic != null) {
 				gridCtrl.runAll(heuristic);
-			} catch(Exception ex) {
+			} else {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Error");
 				alert.setHeaderText("No heuristic");
@@ -83,18 +100,52 @@ public class GridOptionsController {
 			}
 		});
 		
-		//runs Weighted A  Star Search
-		findPath3.setOnMouseClicked(e -> {
+		//runs Sequential A* Search
+		findPath5.setOnMouseClicked(e -> {
 			try {
-				float w = Float.parseFloat(weight.getText());
-				gridCtrl.runWAStar(w, heuristic);
+				float w1 = Float.parseFloat(weight1.getText());
+				float w2 = Float.parseFloat(weight2.getText());
+				Heuristic[] hArray = new Heuristic[5];
+				hArray[0] = new DistanceHeuristic(gridCtrl.getGrid());
+				hArray[1] = new BadDistanceHeuristic(gridCtrl.getGrid());
+				hArray[2] = new ChebyshevHeuristic(gridCtrl.getGrid());
+				hArray[3] = new ManhattanDistanceHeuristic(gridCtrl.getGrid());
+				hArray[4] = new HardCellsAvoidanceHeuristic(gridCtrl.getGrid());
+				gridCtrl.runSAStar(hArray, w1, w2);
 			} catch(Exception ex) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Error");
-				alert.setHeaderText("No weight or heuristic");
-				alert.setContentText("You did not give the weight or select the heuristic to be used");
+				alert.setHeaderText("No weight(s)");
+				alert.setContentText("You did not give one or two of the required weights");
 				alert.showAndWait();
 			}
+		});
+		
+		//runs Integrated A* Search
+		findPath6.setOnMouseClicked(e -> {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Error");
+			alert.setHeaderText("Not implemented");
+			alert.setContentText("This search is not implemented yet");
+			alert.showAndWait();
+		});
+		
+		findPath7.setOnMouseClicked(e -> {
+			Heuristic[] hArray = new Heuristic[5];
+			hArray[0] = new DistanceHeuristic(gridCtrl.getGrid());
+			hArray[1] = new BadDistanceHeuristic(gridCtrl.getGrid());
+			hArray[2] = new ChebyshevHeuristic(gridCtrl.getGrid());
+			hArray[3] = new ManhattanDistanceHeuristic(gridCtrl.getGrid());
+			hArray[4] = new HardCellsAvoidanceHeuristic(gridCtrl.getGrid());
+			gridCtrl.runAllSAStar(hArray);
+		});
+		
+		findPath8.setOnMouseClicked(e -> {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Error");
+			alert.setHeaderText("Not implemented");
+			alert.setContentText("This search is not implemented yet");
+			alert.showAndWait();
 		});
 		
 		//tries to change the location of the start. DOES NOT CHECK IF NEW START IS WITHIN 100 OF END.

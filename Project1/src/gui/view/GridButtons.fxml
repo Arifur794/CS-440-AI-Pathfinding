@@ -16,7 +16,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Button>
                               <Button fx:id="exportMap" alignment="CENTER" mnemonicParsing="false" prefHeight="37.0" prefWidth="231.0" text="Export Map">
@@ -24,7 +24,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets top="10.0" />
                                  </VBox.margin>
                               </Button>
             <Button fx:id="findPath2" alignment="CENTER" layoutX="75.0" layoutY="151.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="261.0" text="Find Uniform Cost Path">
@@ -32,16 +32,19 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets top="10.0" />
                                  </VBox.margin>
             </Button>
-            <ComboBox fx:id="chosenHeuristic" prefHeight="25.0" prefWidth="224.0" promptText="Heuristic?" />
+            <ComboBox fx:id="chosenHeuristic" prefHeight="25.0" prefWidth="224.0" promptText="Heuristic?">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></ComboBox>
             <Button fx:id="findPath" alignment="CENTER" layoutX="69.0" layoutY="67.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="292.0" text="Find A* path">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets top="10.0" />
                                  </VBox.margin>
             </Button>
             <Button fx:id="findPath3" alignment="CENTER" layoutX="75.0" layoutY="114.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="294.0" text="Find Weighted A* path">
@@ -49,7 +52,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets top="10.0" />
                                  </VBox.margin>
             </Button>
             <TextField fx:id="weight" layoutX="10.0" layoutY="434.0" promptText="Enter weight W" text="2" />
@@ -57,13 +60,50 @@
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="findPath5" alignment="CENTER" mnemonicParsing="false" prefHeight="37.0" prefWidth="294.0" text="Find Sequential A* path">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="findPath6" alignment="CENTER" layoutX="10.0" layoutY="305.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="294.0" text="Find Integrated A* path">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <TextField fx:id="weight1" promptText="Enter weight W1" text="2" />
+            <TextField fx:id="weight2" layoutX="10.0" layoutY="342.0" promptText="Enter weight W2" text="2" />
+            <Button fx:id="findPath7" alignment="CENTER" layoutX="10.0" layoutY="389.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="294.0" text="Find all Sequential A* paths">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="findPath8" alignment="CENTER" layoutX="10.0" layoutY="486.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="294.0" text="Find all Integrated A* paths">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </Button>
             <Button fx:id="changeStart" alignment="CENTER" mnemonicParsing="false" prefHeight="37.0" prefWidth="202.0" text="Change Start Placement">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets top="10.0" />
                                  </VBox.margin>
             </Button>
             <Button fx:id="changeEnd" alignment="CENTER" mnemonicParsing="false" prefHeight="37.0" prefWidth="210.0" text="Change End Placement">

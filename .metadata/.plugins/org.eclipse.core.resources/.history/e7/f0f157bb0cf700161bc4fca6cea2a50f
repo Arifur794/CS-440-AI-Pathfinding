@@ -1,0 +1,251 @@
+package searches;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+
+import gui.model.Cell.CellType;
+import gui.model.Grid;
+import heuristics.*;
+
+public class SAStar{
+	
+	private Node[] path;
+	private Heuristic[] hArray;
+	private HashMap<Node, Node[]> mapOfNodes; //a map of each node to the ways each heuristic explored it
+	private ArrayList<PriorityQueue<Node>> allFringes;//list of all the fringes for each heuristic
+	private int hlen;
+	private float w1;
+	private float w2;
+	private Grid grid;
+
+	private Node start;
+	private Node goal;
+	
+	//first heuristic in hArray is the one which must be admissible
+	public SAStar(Node start, Node goal, Grid grid, Heuristic[] hArray, float w1, float w2) {
+		this.start = start;
+		this.goal = goal;
+		this.grid = grid;
+		this.hArray = hArray;
+		this.hlen = hArray.length;
+		this.w1 = w1;
+		this.w2 = w2;
+		this.mapOfNodes = new HashMap<Node, Node[]>();
+		this.allFringes = new ArrayList<PriorityQueue<Node>>(hlen);
+	}
+
+	public Node[] run() {
+		long startTime = System.currentTimeMillis();
+		for(int i = 0; i < hlen; i++) {
+			allFringes.add(new PriorityQueue<Node>( new Comparator<Node>() {
+				public int compare(Node o1, Node o2) {
+					return Float.compare(o1.gcost + o1.hcost, o2.gcost + o2.hcost);
+				}
+			}));
+			addToFringe(start, null, gcostFunc(start, start), hcostFunc(start, i), i);
+			addToFringe(goal, null, Integer.MAX_VALUE, 0, i);
+		}
+
+		PriorityQueue<Node> admissibleFringe = allFringes.get(0);
+		float admissibleCost;
+		float otherCost;
+		while((admissibleCost = getCost(admissibleFringe.peek())) < Integer.MAX_VALUE) { // while minimum cost is less than infinity
+			for(int i = 1; i < hlen; i++) {
+				PriorityQueue<Node> otherFringe = allFringes.get(i);
+				otherCost = getCost(otherFringe.peek());
+				if(otherCost <= w2*admissibleCost) {
+					float goalCost = mapOfNodes.get(goal)[i].gcost;
+					if(goalCost <= otherCost) {
+						if(goalCost < Integer.MAX_VALUE) {
+							System.out.println(mapOfNodes.size() + "were expanded");
+							long totalTime = System.currentTimeMillis() - startTime;
+							System.out.println(totalTime + " was the run time in milliseconds");
+							return unravelPath(i);
+						}
+					} else {
+						exploreNode(otherFringe.poll(), i);
+					}
+
+				} else {
+
+					float addmissibleGoalCost = mapOfNodes.get(goal)[0].gcost;
+					if(addmissibleGoalCost <= admissibleCost) {
+						if(addmissibleGoalCost < Integer.MAX_VALUE) {
+							System.out.println(mapOfNodes.size() + "were expanded");
+							long totalTime = System.currentTimeMillis() - startTime;
+							System.out.println(totalTime + " was the run time in milliseconds");
+							return unravelPath(i);
+						}
+					} else {
+						exploreNode(admissibleFringe.poll(), 0);
+					}
+
+				}
+			}
+
+		}
+
+		return null;
+	}
+	
+	public Node[] run(int x) {
+		long startTime = System.currentTimeMillis();
+		for(int i = 0; i < hlen; i++) {
+			allFringes.add(new PriorityQueue<Node>( new Comparator<Node>() {
+				public int compare(Node o1, Node o2) {
+					return Float.compare(o1.gcost + o1.hcost, o2.gcost + o2.hcost);
+				}
+			}));
+			addToFringe(start, null, gcostFunc(start, start), hcostFunc(start, i), i);
+			addToFringe(goal, null, Integer.MAX_VALUE, 0, i);
+		}
+
+		PriorityQueue<Node> admissibleFringe = allFringes.get(0);
+		float admissibleCost, otherCost;
+		while((admissibleCost = getCost(admissibleFringe.peek())) < Integer.MAX_VALUE) { // while minimum cost is less than infinity
+			for(int i = 1; i < hlen; i++) {
+				PriorityQueue<Node> otherFringe = allFringes.get(i);
+				otherCost = getCost(otherFringe.peek());
+				if(otherCost <= w2*admissibleCost) {
+					float goalCost = mapOfNodes.get(goal)[i].gcost;
+					if(goalCost <= otherCost) {
+						if(goalCost < Integer.MAX_VALUE) {
+							System.out.println(mapOfNodes.size() + ",");
+							long totalTime = System.currentTimeMillis() - startTime;
+							System.out.println(totalTime + ",");
+							return unravelPath(i);
+						}
+					} else {
+						exploreNode(otherFringe.poll(), i);
+					}
+
+				} else {
+
+					float addmissibleGoalCost = mapOfNodes.get(goal)[0].gcost;
+					if(addmissibleGoalCost <= admissibleCost) {
+						if(addmissibleGoalCost < Integer.MAX_VALUE) {
+							System.out.println(mapOfNodes.size() + ",");
+							long totalTime = System.currentTimeMillis() - startTime;
+							System.out.println(totalTime + ",");
+							return unravelPath(i);
+						}
+					} else {
+						exploreNode(admissibleFringe.poll(), 0);
+					}
+
+				}
+			}
+
+		}
+
+		return null;
+	}
+
+	private void exploreNode(Node n, int searchNum) {
+		n.setNeighborList(grid.getNeighbors(n.x, n.y));
+		n.isExplored = true;
+		for(Node nc : n.neighborList) {
+			if(nc.celltype == CellType.BLOCKED) {
+				continue;
+			}
+			if(mapOfNodes.get(nc) == null) {
+				createEntry(nc);// adds node to map because it didn't exist
+			}
+
+			nc = mapOfNodes.get(nc)[searchNum];
+			float childCost = n.gcost + gcostFunc(n, nc);
+			if(nc.gcost > childCost){
+				nc.gcost = childCost;
+				if(!mapOfNodes.get(nc)[searchNum].isExplored) {
+					addToFringe(nc, n, childCost, hcostFunc(nc, searchNum), searchNum);
+				}
+
+			}
+		}
+	}
+
+	public Node[] unravelPath(int seqNum) {
+		ArrayList<Node> pathList = new ArrayList<Node>();
+		Node n = mapOfNodes.get(goal)[seqNum], p;
+		while(n != null) {
+			p = n.getParent();
+			pathList.add(n);
+			n = p;
+		}
+		path = new Node[pathList.size()];
+		path = pathList.toArray(path);
+		return path;
+	}
+
+	private void addToFringe(Node n, Node p, float gCost, float hCost, int fringeNum) {
+		PriorityQueue<Node> fringe = allFringes.get(fringeNum);
+		if(inFringe(n, fringeNum)) {
+			removeFromFringe(n, fringeNum);
+		}
+		n.gcost = gCost; n.hcost = hCost;
+		n.inFringe = true; n.setParent(p);
+		fringe.add(n);
+		insertNode(n, fringeNum);
+	}
+
+	private boolean inFringe(Node n, int fringeNum) {
+		Node[] simNodes = mapOfNodes.get(n);
+		return (simNodes != null && simNodes[fringeNum] != null) ? simNodes[fringeNum].inFringe : false;
+	}
+
+	private void removeFromFringe(Node n, int fringeNum) {
+		allFringes.get(fringeNum).remove(n);
+	}
+
+	public float gcostFunc(Node parent, Node child) {
+		return grid.costTo(parent, child);
+	}
+
+	public float hcostFunc(Node n, int heuristicNum) {
+		return w1*hArray[heuristicNum].getH(n);
+	}
+
+	public float getCost(Node n) {
+		return n.gcost + w1*n.hcost;
+	}
+
+	private void insertNode(Node n, int arrIndex) {
+		Node[] ncArray = mapOfNodes.get(n);
+		if(ncArrayay == null) {
+			createEntry(n);
+			ncArrayay = mapOfNodes.get(n);
+		}
+
+		ncArray[ArrayIndex] = n;
+
+	}
+
+	private void createEntry(Node n) {
+		Node[] nArr = new Node[hlen];
+		for(int i = 0; i < hlen; i++){
+			Node nc = new Node(n);
+			nc.gcost = Integer.MAX_VALUE;
+			nc.hcost = 0;
+			nArr[i] = nc;
+		}
+		mapOfNodes.put(n, nArr);
+	}
+
+
+	public float calculateCost() {
+		if(path == null) {
+			throw new NullPointerException("The path is null. The algorithm may not have run.");
+		}
+
+		float cost = 0;
+		Node p = path[0];
+		for(Node n : path) {
+			cost += grid.costTo(n, p);
+			p = n;
+		}
+
+		return cost;
+	}
+}

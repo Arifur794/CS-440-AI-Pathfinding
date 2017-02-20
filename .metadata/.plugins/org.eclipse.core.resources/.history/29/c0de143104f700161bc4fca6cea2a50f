@@ -1,0 +1,9 @@
+package searches;
+
+import gui.model.Grid;
+
+public class SAStar extends SearchAlgo {
+	public SAStar(Node start, Node goal, Grid grid) {
+		super(start, goal, grid);
+	}
+}

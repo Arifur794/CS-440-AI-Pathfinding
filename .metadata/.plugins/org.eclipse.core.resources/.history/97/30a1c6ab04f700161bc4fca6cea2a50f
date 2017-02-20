@@ -1,0 +1,41 @@
+package searches;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+
+import gui.model.Grid;
+import heuristics.Heuristic;
+
+public class SAStar{
+	
+	private Node start, goal;
+	private Node[] path;
+	private Heuristic[] harr;
+	private int hlen;
+	private float w1, w2;
+	private Grid grid;
+	/*
+	 * allNodes maps nodes explored of an admissible heuristic to
+	 * same nodes of other heuristics
+	 */
+	private HashMap<Node, Node[]> nodeMap;
+	/*
+	 * allQueues are the list of queues ordered in the same way as the
+	 * input heuristics (each queue corresponds to a heuristic in harr)
+	 */
+	private ArrayList<PriorityQueue<Node>> allFringes;
+
+
+	/*
+	 * harr is an array of all heuristics to be used in algorithm
+	 * NOTE: The first heuristic must be an admissible heuristic.
+	 * The other heuristics maybe inadmissible.
+	 */e HashMap<Node, Node[]> mapOfNodes;
+	
+	//hArray is the heuristics to be used. First heuristic must be admissable.
+	public SAStar(Node start, Node goal, Grid grid, Heuristic[] hArray, float w1, float w2) {
+		super(start, goal, grid);
+		
+	}
+}

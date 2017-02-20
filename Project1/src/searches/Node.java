@@ -11,6 +11,8 @@ public class Node extends Cell {
 	public boolean isExplored;
 	public Node[] neighborList;
 	public boolean inFringe;
+	public boolean inAncList;
+	public boolean inInadList;
 	
 	public Node(Cell c) {
 		super(c.x, c.y, c.celltype, c.dir);
@@ -18,6 +20,8 @@ public class Node extends Cell {
 		this.hcost = 0;
 		this.isExplored = false;	
 		this.inFringe = false;
+		this.inAncList = false;
+		this.inInadList = false;
 	}
 	
 	public Node(Cell c, Cell[] n) {

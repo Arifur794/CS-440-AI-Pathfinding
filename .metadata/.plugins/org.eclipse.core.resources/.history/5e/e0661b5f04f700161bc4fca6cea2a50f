@@ -1,0 +1,21 @@
+package searches;
+
+import java.util.PriorityQueue;
+
+import gui.model.Grid;
+import heuristics.*;
+
+public class SAStar extends SearchAlgo {
+	
+	Node[] path; // path found by algorithm
+	private ArrayList<PriorityQueue<Node>> allFringe; // fringe used by algorithm
+	private Node[][] allNodes; // all explored nodes are stored here
+	Node goal;
+	Node start;
+	Grid grid;
+	
+	
+	public SAStar(Node start, Node goal, Grid grid, Heuristic[] hArray, float w1, float w2) {
+		super(start, goal, grid);
+	}
+}
