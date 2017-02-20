@@ -54,7 +54,9 @@ public class MapGenerator extends Application {
 			
 			//show the scene
 			Scene scene = new Scene(rootLayout);
+			
 			primaryStage.setScene(scene);
+			primaryStage.setMaximized(true);
 			primaryStage.show();
 			
 		} catch(IOException e) {

@@ -41,7 +41,7 @@ public abstract class SearchAlgo {
 			if(n.equals(goal)) {
 				System.out.println(i+ " nodes were looked at before goal was found");
 				long totalTime = System.currentTimeMillis() - startTime;
-				System.out.print(totalTime + " was the run time in milliseconds");
+				System.out.println(totalTime + " was the run time in milliseconds");
 				return unravelPath();
 			}
 			for(Node nc : n.neighborList) {

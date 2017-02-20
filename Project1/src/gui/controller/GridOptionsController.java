@@ -4,10 +4,12 @@ import java.io.File;
 
 import fileHandler.GridFileManager;
 import gui.model.Grid;
+import heuristics.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -18,9 +20,14 @@ public class GridOptionsController {
 	private Button importMap, exportMap, findPath, findPath2, findPath3, findPath4, changeStart, changeEnd;
 	@FXML
 	private TextField row, column, weight;
+	@FXML
+	private ComboBox<String> chosenHeuristic;
+	
 	private GridController gridCtrl;
 	private FileChooser fileChoose = new FileChooser();
 	private Stage stage;
+	private String[] heuristics = {"Distance", "BadDistance", "Chebyshev", "Manhattan", "HardCellsAvoidance"};
+	private Heuristic heuristic;
 	
 	@FXML
 	public void initialize() {
@@ -48,7 +55,15 @@ public class GridOptionsController {
 		
 		//runs AStar search
 		findPath.setOnMouseClicked(e -> {
-			gridCtrl.runAStar();
+			try {
+				gridCtrl.runAStar(heuristic);
+			} catch(Exception ex) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Error");
+				alert.setHeaderText("No heuristic");
+				alert.setContentText("You did not select the heuristic to be used");
+				alert.showAndWait();
+			}	
 		});
 		
 		//runs UCS
@@ -57,19 +72,27 @@ public class GridOptionsController {
 		});
 		
 		findPath4.setOnMouseClicked(e -> {
-			gridCtrl.runAll();
+			try {
+				gridCtrl.runAll(heuristic);
+			} catch(Exception ex) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Error");
+				alert.setHeaderText("No heuristic");
+				alert.setContentText("You did not select the heuristic to be used");
+				alert.showAndWait();
+			}
 		});
 		
 		//runs Weighted A  Star Search
 		findPath3.setOnMouseClicked(e -> {
 			try {
 				float w = Float.parseFloat(weight.getText());
-				gridCtrl.runWAStar(w);
+				gridCtrl.runWAStar(w, heuristic);
 			} catch(Exception ex) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Error");
-				alert.setHeaderText("No weight");
-				alert.setContentText("You did not give the weight");
+				alert.setHeaderText("No weight or heuristic");
+				alert.setContentText("You did not give the weight or select the heuristic to be used");
 				alert.showAndWait();
 			}
 		});
@@ -102,7 +125,7 @@ public class GridOptionsController {
 			
 		});
 		
-		//tries to change the location of hte end. DOES NOT CHECK IF NEW END IS WITHIN 100 OF START.
+		//tries to change the location of the end. DOES NOT CHECK IF NEW END IS WITHIN 100 OF START.
 		changeEnd.setOnMouseClicked(e -> {
 			try {
 				int[] endStart = {0, 0};
@@ -129,10 +152,35 @@ public class GridOptionsController {
 			}
 			
 		});
+		
+		chosenHeuristic.setOnAction( e -> {
+			String thisH = chosenHeuristic.getSelectionModel().getSelectedItem();
+			if(thisH.equals(heuristics[0])) {
+				heuristic = new DistanceHeuristic(gridCtrl.getGrid());
+				System.out.println("Using modified Euclidean Distance");
+			}
+			if(thisH.equals(heuristics[1])) {
+				heuristic = new BadDistanceHeuristic(gridCtrl.getGrid());
+				System.out.println("Using unmodified Euclidean Distance");
+			}
+			if(thisH.equals(heuristics[2])) {
+				heuristic = new ChebyshevHeuristic(gridCtrl.getGrid());
+				System.out.println("Using Chebyshev Distance");
+			}
+			if(thisH.equals(heuristics[3])) {
+				heuristic = new ManhattanDistanceHeuristic(gridCtrl.getGrid());
+				System.out.println("using Manhattan Distance");
+			}
+			if(thisH.equals(heuristics[4])) {
+				heuristic = new HardCellsAvoidanceHeuristic(gridCtrl.getGrid());
+				System.out.println("using Avoid Hard Cells");
+			}
+		});
 	}
 	
 	public void setGridController(GridController gc) {
 		this.gridCtrl = gc;
+		chosenHeuristic.getItems().addAll(heuristics);
 	}
 	
 	public void setStage(Stage s) {
