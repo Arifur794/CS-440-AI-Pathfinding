@@ -1,4 +1,3 @@
-
 package heuristics;
 
 import searches.Node;
